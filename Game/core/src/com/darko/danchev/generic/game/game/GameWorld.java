@@ -94,7 +94,7 @@ public class GameWorld {
     }
 
     private void initWalls(){
-        enemyWalls = new ArrayList<EnemyWall>(8);
+        enemyWalls = new ArrayList<EnemyWall>(7);
         EnemyWall first = new EnemyWall(genericGame,physicsWorld,stage,15, 15);
         enemyWalls.add(first);
         for(int i = 1; i < 8; i++){

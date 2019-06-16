@@ -24,7 +24,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/.gradle" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="core" exported="" />
     <orderEntry type="library" exported="" name="Gradle: gdx-backend-lwjgl-1.9.9" level="project" />
@@ -47,9 +47,6 @@
     <orderEntry type="library" exported="" name="Gradle: jinput-platform-2.0.5-natives-linux" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jinput-platform-2.0.5-natives-windows" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jinput-platform-2.0.5-natives-osx" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: gdx-freetype-1.9.9" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: box2dlights-1.4" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: gdx-box2d-1.9.9" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: gdx-freetype-1.9.9" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: box2dlights-1.4" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: gdx-box2d-1.9.9" level="project" />

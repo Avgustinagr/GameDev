@@ -50,11 +50,13 @@ public class EnemyWall {
     }*/
 
    private void initWall(){
+       Random random = new Random();
+       int index = random.nextInt(7);
        Enemy enemy = new Enemy(genericGame, physicsWorld,
-               genericGame.assets.manager.get(Assets.enemy, Texture.class),
+               genericGame.assets.manager.get(Assets.enemies[index], Texture.class),
                7.5f, y , 15, 1.4f);
        float ratio = (float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth();
-       float worldWidth = genericGame.WORLD_HEIGHT / ratio;
+       float worldWidth = GenericGame.WORLD_HEIGHT / ratio;
        enemy.setSize(worldWidth+1, 1.5f);
        stage.addActor(enemy);
    }

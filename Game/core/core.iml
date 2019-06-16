@@ -24,20 +24,12 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/.gradle" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="Gradle: gdx-freetype-1.9.9" level="project" />
     <orderEntry type="library" exported="" name="Gradle: gdx-controllers-1.9.9" level="project" />
     <orderEntry type="library" exported="" name="Gradle: box2dlights-1.4" level="project" />
     <orderEntry type="library" exported="" name="Gradle: gdx-box2d-1.9.9" level="project" />
     <orderEntry type="library" exported="" name="Gradle: gdx-1.9.9" level="project" />
-    <orderEntry type="library" exported="" name="core.core-1.0" level="project" />
-    <orderEntry type="library" exported="" name="core.core-1.0" level="project" />
-    <orderEntry type="library" exported="" name="core.core-1.0" level="project" />
-    <orderEntry type="library" exported="" name="core.core-1.0" level="project" />
-    <orderEntry type="library" exported="" name="core.core-1.0" level="project" />
-    <orderEntry type="library" exported="" name="core.core-1.0" level="project" />
-    <orderEntry type="library" exported="" name="core.core-1.0" level="project" />
-    <orderEntry type="library" exported="" name="core.core-1.0" level="project" />
   </component>
 </module>
