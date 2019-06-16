@@ -5,10 +5,13 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.darko.danchev.generic.game.GenericGame;
 import com.darko.danchev.generic.game.assets.Assets;
@@ -32,6 +35,7 @@ public class GameWorld {
     private List<EnemyWall> enemyWalls;
     private float worldWidth;
 
+
     //private SpriteBatch batch;
     //private Box2DDebugRenderer debugRenderer;
 
@@ -44,6 +48,8 @@ public class GameWorld {
         this.player = new Player(genericGame,physicsWorld,genericGame.assets.manager.get(Assets.player, Texture.class),
                 worldWidth /2, WORLD_HEIGHT / 2 ,2,2);
         this.stage = new Stage(new StretchViewport(worldWidth, WORLD_HEIGHT));
+
+
 
         this.stage.addActor(player);
 

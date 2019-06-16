@@ -11,6 +11,9 @@ public class Assets {
     public static String enemy = "enemy/enemy.png";
     public static String background = "ui/background.png";
     public static String splash = "splash/start.png";
+    public static String redbutton = "menu/red.png";
+    public static String bluebutton = "menu/blue.png";
+    public static String yellowbutton = "menu/yellow.png";
 
     public Assets(){
         manager = new AssetManager();
@@ -21,6 +24,9 @@ public class Assets {
         manager.load(enemy, Texture.class);
         manager.load(background, Texture.class);
         manager.load(splash, Texture.class);
+        manager.load(redbutton, Texture.class);
+        manager.load(bluebutton, Texture.class);
+        manager.load(yellowbutton, Texture.class);
     }
 
 

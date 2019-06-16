@@ -1,5 +1,6 @@
 package com.darko.danchev.generic.game.model;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -9,6 +10,8 @@ import com.darko.danchev.generic.game.assets.Assets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static com.darko.danchev.generic.game.GenericGame.WORLD_HEIGHT;
 
 public class EnemyWall {
 
@@ -50,6 +53,9 @@ public class EnemyWall {
        Enemy enemy = new Enemy(genericGame, physicsWorld,
                genericGame.assets.manager.get(Assets.enemy, Texture.class),
                7.5f, y , 15, 1.4f);
+       float ratio = (float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth();
+       float worldWidth = genericGame.WORLD_HEIGHT / ratio;
+       enemy.setSize(worldWidth+1, 1.5f);
        stage.addActor(enemy);
    }
 
