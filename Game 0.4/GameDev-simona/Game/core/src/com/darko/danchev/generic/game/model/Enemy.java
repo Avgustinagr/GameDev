@@ -52,7 +52,7 @@ public class Enemy extends Image {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = bodyShape;
-        fixtureDef.density = 0.00001f;
+        fixtureDef.density = 0.1f;
         fixtureDef.friction = 0.9f;
         fixtureDef.restitution = 0f;
 

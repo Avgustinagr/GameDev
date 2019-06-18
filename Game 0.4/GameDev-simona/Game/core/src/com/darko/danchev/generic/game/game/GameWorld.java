@@ -41,7 +41,7 @@ public class GameWorld {
 
     public GameWorld(GenericGame genericGame){
         this.genericGame = genericGame;
-        this.physicsWorld = new World(new Vector2(0,1f),false);
+        this.physicsWorld = new World(new Vector2(0,2f),false);
         this.physicsWorld.setContactListener(new B2dContactListener());
         float ratio = (float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth();
         this.worldWidth = WORLD_HEIGHT / ratio;

@@ -87,8 +87,8 @@ public class GameScreen implements Screen {
 
     private void changeBackground() {
         // red part
-        if (Gdx.input.getX() <  Gdx.graphics.getWidth()/3f) {
-            if (Gdx.input.isTouched()) {
+        if ((Gdx.input.getX() <  Gdx.graphics.getWidth()/3f
+            && Gdx.input.isTouched()) || Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
 
                 System.out.println(gameWorld.getEnemyWalls().get(0).getColor());
 
@@ -100,11 +100,10 @@ public class GameScreen implements Screen {
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                 gameWorld.player.setColormove(Color.RED);
 
-            }
         }
         // blue part
-        if (Gdx.input.getX() >  Gdx.graphics.getWidth()/3f && Gdx.input.getX() < (Gdx.graphics.getWidth()/3f)*2) {
-            if (Gdx.input.isTouched()) {
+        if (((Gdx.input.getX() >  Gdx.graphics.getWidth()/3f && Gdx.input.getX() < (Gdx.graphics.getWidth()/3f)*2)
+            && Gdx.input.isTouched()) || Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
 
                 if(gameWorld.getEnemyWalls().get(0).getColor() != Color.BLUE) {
                     System.out.println("GAME OVER");
@@ -114,13 +113,12 @@ public class GameScreen implements Screen {
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                 gameWorld.player.setColormove(Color.BLUE);
 
-            }
+
         }
 
         //yellow part
-        if (Gdx.input.getX() >  (Gdx.graphics.getWidth()/3f)*2) {
-            if (Gdx.input.isTouched()) {
-
+        if ((Gdx.input.getX() >  (Gdx.graphics.getWidth()/3f)*2
+            && Gdx.input.isTouched()) || Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
                 if(gameWorld.getEnemyWalls().get(0).getColor() != Color.YELLOW) {
                     System.out.println("GAME OVER");
                 }
@@ -128,8 +126,6 @@ public class GameScreen implements Screen {
                 Gdx.gl.glClearColor(242/255f, 182/255f, 4/255f, 1); //
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                 gameWorld.player.setColormove(Color.YELLOW);
-
-            }
         }
     }
 
