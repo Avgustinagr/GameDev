@@ -82,7 +82,6 @@ public class GameScreen implements Screen {
         //batch.draw(background,0,0);
         batch.end();
         gameWorld.render();
-<<<<<<< HEAD
 
         batch.begin();
         drawScore();
@@ -91,9 +90,6 @@ public class GameScreen implements Screen {
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
 
-        gameWorld.update();
-=======
->>>>>>> 275c52fc5a3fdf98d6c64e2cfcb3d3232321e595
         gameWorld.update();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
