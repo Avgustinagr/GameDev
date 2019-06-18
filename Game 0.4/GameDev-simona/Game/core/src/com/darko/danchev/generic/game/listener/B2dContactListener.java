@@ -4,7 +4,6 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.darko.danchev.generic.game.model.EnemyWall;
 import com.darko.danchev.generic.game.model.Enemy;
 import com.darko.danchev.generic.game.model.Player;
 

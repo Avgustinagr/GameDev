@@ -90,12 +90,6 @@ public class GameScreen implements Screen {
         if ((Gdx.input.getX() <  Gdx.graphics.getWidth()/3f
             && Gdx.input.isTouched()) || Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
 
-                System.out.println(gameWorld.getEnemyWalls().get(0).getColor());
-
-                if(gameWorld.getEnemyWalls().get(0).getColor() != Color.RED) {
-                    System.out.println("GAME OVER");
-                }
-
                 Gdx.gl.glClearColor(242/255f, 4/255f, 48/255f, 1); //
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                 gameWorld.player.setColormove(Color.RED);
@@ -104,10 +98,6 @@ public class GameScreen implements Screen {
         // blue part
         if (((Gdx.input.getX() >  Gdx.graphics.getWidth()/3f && Gdx.input.getX() < (Gdx.graphics.getWidth()/3f)*2)
             && Gdx.input.isTouched()) || Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
-
-                if(gameWorld.getEnemyWalls().get(0).getColor() != Color.BLUE) {
-                    System.out.println("GAME OVER");
-                }
 
                 Gdx.gl.glClearColor(4/255f, 107/255f, 242/255f, 1); //
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -119,9 +109,6 @@ public class GameScreen implements Screen {
         //yellow part
         if ((Gdx.input.getX() >  (Gdx.graphics.getWidth()/3f)*2
             && Gdx.input.isTouched()) || Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
-                if(gameWorld.getEnemyWalls().get(0).getColor() != Color.YELLOW) {
-                    System.out.println("GAME OVER");
-                }
 
                 Gdx.gl.glClearColor(242/255f, 182/255f, 4/255f, 1); //
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
