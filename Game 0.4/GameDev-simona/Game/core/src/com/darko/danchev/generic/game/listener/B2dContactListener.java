@@ -4,6 +4,8 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.darko.danchev.generic.game.model.EnemyWall;
+import com.darko.danchev.generic.game.model.Enemy;
 import com.darko.danchev.generic.game.model.Player;
 
 public class B2dContactListener implements ContactListener {
@@ -14,9 +16,18 @@ public class B2dContactListener implements ContactListener {
 
         if(classA.equals("com.darko.danchev.generic.game.model.Player") && classB.equals("com.darko.danchev.generic.game.model.Enemy")){
             Player player = (Player)(contact.getFixtureA().getBody().getUserData());
-            player.die();
+            Enemy enemy = (Enemy) (contact.getFixtureB().getBody().getUserData());
+            if (player.getColormove() != enemy.getEnemyColor()){
+                player.die();
+                System.out.println("dead");
+            }
+            else
+            {
+                System.out.println("alive");
+                contact.setEnabled(false);
+            }
         }
-        else if(classA.equals("com.darko.danchev.generic.game.model.Enemy") && classB.equals("com.darko.danchev.generic.game.model.Player")){
+        else if(classA.equals("com.darko.danchev.generic.game.model.EnemyWall") && classB.equals("com.darko.danchev.generic.game.model.Player")){
             Player player = (Player)(contact.getFixtureB().getBody().getUserData());
             player.die();
 
@@ -30,11 +41,11 @@ public class B2dContactListener implements ContactListener {
 
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
-
+        contact.setEnabled(false);
     }
 
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
-
+        contact.setEnabled(false);
     }
 }

@@ -98,6 +98,8 @@ public class GameScreen implements Screen {
 
                 Gdx.gl.glClearColor(242/255f, 4/255f, 48/255f, 1); //
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                gameWorld.player.setColormove(Color.RED);
+
             }
         }
         // blue part
@@ -110,8 +112,11 @@ public class GameScreen implements Screen {
 
                 Gdx.gl.glClearColor(4/255f, 107/255f, 242/255f, 1); //
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                gameWorld.player.setColormove(Color.BLUE);
+
             }
         }
+
         //yellow part
         if (Gdx.input.getX() >  (Gdx.graphics.getWidth()/3f)*2) {
             if (Gdx.input.isTouched()) {
@@ -122,6 +127,8 @@ public class GameScreen implements Screen {
 
                 Gdx.gl.glClearColor(242/255f, 182/255f, 4/255f, 1); //
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                gameWorld.player.setColormove(Color.YELLOW);
+
             }
         }
     }

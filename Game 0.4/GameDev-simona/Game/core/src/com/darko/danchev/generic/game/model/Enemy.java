@@ -10,15 +10,17 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.darko.danchev.generic.game.GenericGame;
+import com.darko.danchev.generic.game.assets.enums.Color;
 
 public class Enemy extends Image {
 
     private GenericGame genericGame;
     private World physicsWorld;
     private Body body;
+    private Color color;
 
     public Enemy(GenericGame genericGame, World physicsWorld, Texture appearance,
-                 float x, float y, float width, float height){
+                 float x, float y, float width, float height, Color color){
         super(appearance);
         this.genericGame = genericGame;
         this.physicsWorld = physicsWorld;
@@ -26,8 +28,16 @@ public class Enemy extends Image {
         setOrigin(x,y);
         setWidth(width);
         setHeight(height);
-
+        this.color  = color;
         initBody();
+    }
+
+    public Color getEnemyColor() {
+        return color;
+    }
+
+    public void die(){
+        genericGame.gameState = GenericGame.GAME_STATE.MENU;
     }
 
     private void initBody(){
@@ -42,9 +52,9 @@ public class Enemy extends Image {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = bodyShape;
-        fixtureDef.density = 0.5f;
-        fixtureDef.friction = 0.5f;
-        fixtureDef.restitution = 0.5f;
+        fixtureDef.density = 0.00001f;
+        fixtureDef.friction = 0.9f;
+        fixtureDef.restitution = 0f;
 
         body.createFixture(fixtureDef);
         body.setUserData(this);

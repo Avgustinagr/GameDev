@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.darko.danchev.generic.game.GenericGame;
+import com.darko.danchev.generic.game.assets.enums.Color;
 
 
 public class Player extends Image {
@@ -19,6 +20,7 @@ public class Player extends Image {
     private World physicsWorld;
     private Body body;
     private boolean transition;
+    private Color colormove;
 
     public Player(GenericGame genericGame, World physicsWorld, Texture appearance,float x, float y,
                   float width, float height){
@@ -32,6 +34,15 @@ public class Player extends Image {
         this.physicsWorld = physicsWorld;
         this.initBody();
         this.transition = false;
+        this.colormove = Color.RED;
+    }
+
+    public Color getColormove(){
+        return this.colormove;
+    }
+
+    public void setColormove(Color colormove){
+        this.colormove = colormove;
     }
 
     private void repositionBody(float y){
@@ -120,7 +131,7 @@ public class Player extends Image {
         }
 
         body.setLinearVelocity(velocity, 0);
-        body.applyForceToCenter(0, 200f, true);
+        body.applyForceToCenter(0, 10f, true);
     }
 
     public void die(){

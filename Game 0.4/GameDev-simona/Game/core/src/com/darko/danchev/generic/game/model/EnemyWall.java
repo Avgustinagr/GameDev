@@ -18,7 +18,6 @@ public class EnemyWall {
 
     private GenericGame genericGame;
     private World physicsWorld;
-    private List<Enemy> enemyList;
     private float x;
     private float y;
     private Stage stage;
@@ -56,13 +55,15 @@ public class EnemyWall {
        int index = random.nextInt(4);
        Enemy enemy = new Enemy(genericGame, physicsWorld,
                genericGame.assets.manager.get(Assets.blocks[index].getFilename(), Texture.class),
-               8.5f, y , 15, 1.4f);
+               8.5f, y , 15, 1.4f, Assets.blocks[index].getColor());
        this.color = Assets.blocks[index].getColor();
        float ratio = (float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth();
        float worldWidth = GenericGame.WORLD_HEIGHT / ratio;
        enemy.setSize(worldWidth+1, 1.5f);
        stage.addActor(enemy);
    }
+
+
 
     public float getX(){
         return x;
