@@ -7,10 +7,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -42,7 +44,7 @@ public class GameScreen implements Screen {
     private TextureRegionDrawable myTexRegionDrawable;
     private ImageButton button;
     private Stage stage;
-
+    private BitmapFont font;
 
 
     public GameScreen(GenericGame genericGame) {
@@ -59,12 +61,13 @@ public class GameScreen implements Screen {
         this.camera.setToOrtho(false, GenericGame.WIDTH, GenericGame.HEIGHT);
         this.gameWorld = new GameWorld(this.genericGame);
         this.background = genericGame.assets.manager.get(Assets.background, Texture.class);
+        this.font = new BitmapFont();
+
         float ratio = (float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth();
         float worldWidth = WORLD_HEIGHT / ratio;
         this.stage = new Stage(new StretchViewport(worldWidth, WORLD_HEIGHT));
         stage.clear();
         setUpButtons(worldWidth);
-
 
         //buttons.add(genericGame.assets.manager.get(Assets.redbutton, Texture.class));
     }
@@ -78,10 +81,16 @@ public class GameScreen implements Screen {
         changeBackground();
         //batch.draw(background,0,0);
         batch.end();
+        gameWorld.render();
+
+        batch.begin();
+        drawScore();
+        batch.end();
+
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
 
-        gameWorld.render();
+        gameWorld.update();
         gameWorld.update();
     }
 
@@ -144,7 +153,16 @@ public class GameScreen implements Screen {
 
     private void setUpBackgrouns(){
         this.backgrounds = new ArrayList<Texture>(6);
+    }
 
+
+    private void drawScore() {
+        GlyphLayout glyphLayout = new GlyphLayout();
+        String currentScore = "Score " + this.gameWorld.getScore();
+        glyphLayout.setText(font, currentScore);
+        float width = glyphLayout.width;
+        font.getData().setScale(8);
+        font.draw(this.batch, glyphLayout, camera.position.x - width/2, GenericGame.HEIGHT - 50 );
     }
 
     @Override

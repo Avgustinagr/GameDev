@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -35,6 +36,7 @@ public class GameWorld {
     private Stage stage;
     private float worldWidth;
     private Enemy currentEnemy;
+    private int score;
 
     //private SpriteBatch batch;
     //private Box2DDebugRenderer debugRenderer;
@@ -42,7 +44,7 @@ public class GameWorld {
     public GameWorld(GenericGame genericGame){
         this.genericGame = genericGame;
         this.physicsWorld = new World(new Vector2(0,1f),true);
-        this.physicsWorld.setContactListener(new B2dContactListener());
+        this.physicsWorld.setContactListener(new B2dContactListener(this));
         float ratio = (float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth();
         this.worldWidth = WORLD_HEIGHT / ratio;
         this.player = new Player(genericGame,physicsWorld,genericGame.assets.manager.get(Assets.player, Texture.class),
@@ -52,7 +54,7 @@ public class GameWorld {
         this.stage.addActor(player);
 
         this.initEnemy();
-
+        this.score = 0;
         //this.batch = new SpriteBatch();
         //this.debugRenderer = new Box2DDebugRenderer();
 
@@ -81,6 +83,12 @@ public class GameWorld {
 
         this.regenerateEnemy();
         if(genericGame.gameState == GenericGame.GAME_STATE.MENU){
+
+            if(genericGame.highScore < score){
+                genericGame.highScore = score;
+                genericGame.updateHighScore(score);
+            }
+
             genericGame.setScreen(new MenuScreen(genericGame));
         }
     }
@@ -119,4 +127,13 @@ public class GameWorld {
         stage.addActor(currentEnemy);
     }
 
+
+    public int getScore() {
+        return score;
+    }
+
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 }

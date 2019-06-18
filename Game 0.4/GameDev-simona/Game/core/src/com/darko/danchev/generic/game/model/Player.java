@@ -112,27 +112,10 @@ public class Player extends Image {
             transition = false;
         }*/
     }
-
     public boolean getTransition(){
         return this.transition;
     }
-    public void jump(int dir){
-        float velocity = body.getLinearVelocity().x;
-        if ( dir == 0)
-        {
-            if (velocity > 0) {
-                velocity = -body.getLinearVelocity().x;
-            }
-        }
-        else {
-            if (velocity < 0) {
-                velocity = -body.getLinearVelocity().x;
-            }
-        }
 
-        body.setLinearVelocity(velocity, 0);
-        body.applyForceToCenter(0, 10f, true);
-    }
 
     public void die(){
         genericGame.gameState = GenericGame.GAME_STATE.MENU;

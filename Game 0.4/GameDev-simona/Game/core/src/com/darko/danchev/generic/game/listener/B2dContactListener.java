@@ -1,13 +1,22 @@
 package com.darko.danchev.generic.game.listener;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.darko.danchev.generic.game.game.GameWorld;
 import com.darko.danchev.generic.game.model.Enemy;
 import com.darko.danchev.generic.game.model.Player;
 
 public class B2dContactListener implements ContactListener {
+
+    private GameWorld gameWorld;
+
+    public B2dContactListener(GameWorld gameWorld) {
+        this.gameWorld = gameWorld;
+    }
+
     @Override
     public void beginContact(Contact contact) {
         String classA = contact.getFixtureA().getBody().getUserData().getClass().getName();
@@ -18,11 +27,10 @@ public class B2dContactListener implements ContactListener {
             Enemy enemy = (Enemy) (contact.getFixtureB().getBody().getUserData());
             if (player.getColormove() != enemy.getEnemyColor()){
                 player.die();
-                System.out.println("dead");
             }
             else
             {
-                System.out.println("alive");
+                updateScore();
                 contact.setEnabled(false);
             }
         }
@@ -47,4 +55,11 @@ public class B2dContactListener implements ContactListener {
     public void postSolve(Contact contact, ContactImpulse impulse) {
         contact.setEnabled(false);
     }
+
+    private void updateScore() {
+
+        int score = gameWorld.getScore() + 1;
+        gameWorld.setScore(score);
+    }
+
 }

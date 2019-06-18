@@ -18,6 +18,7 @@ public class Enemy extends Image {
     private World physicsWorld;
     private Body body;
     private Color color;
+    private boolean scored;
 
     public Enemy(GenericGame genericGame, World physicsWorld, Texture appearance,
                  float x, float y, float width, float height, Color color){
@@ -29,6 +30,7 @@ public class Enemy extends Image {
         setWidth(width);
         setHeight(height);
         this.color  = color;
+        this.scored = false;
         initBody();
     }
 
@@ -66,5 +68,13 @@ public class Enemy extends Image {
     public void act(float delta){
         this.setPosition(body.getPosition().x - getWidth() / 2,body.getPosition().y - getHeight() / 2);
         this.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
+    }
+
+    public boolean isScored() {
+        return this.scored;
+    }
+
+    public void makeScored() {
+        this.scored = true;
     }
 }

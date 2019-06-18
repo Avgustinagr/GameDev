@@ -3,6 +3,7 @@ package com.darko.danchev.generic.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -25,6 +26,8 @@ public class GenericGame extends Game {
 	public Assets assets;
 
 	public GAME_STATE gameState;
+	public int highScore;
+	private Preferences preferences;
 
 	@Override
 	public void create () {
@@ -34,7 +37,20 @@ public class GenericGame extends Game {
 			System.out.println("Loading: " + this.assets.manager.getLoadedAssets());
 		}
 		this.gameState = GAME_STATE.MENU;
+		this.preferences = Gdx.app.getPreferences("highScorePreferences");
+		if(preferences.contains("highScore")) {
+			this.highScore =preferences.getInteger("highScore");
+		} else {
+			updateHighScore(0);
+			this.highScore = 0;
+		}
+
 		this.setScreen(new MenuScreen(this));
+	}
+
+	public void updateHighScore(int newHighScore) {
+		preferences.putInteger("highScore",newHighScore);
+		preferences.flush();
 	}
 
 	@Override
