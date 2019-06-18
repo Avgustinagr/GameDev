@@ -78,11 +78,10 @@ public class GameScreen implements Screen {
         changeBackground();
         //batch.draw(background,0,0);
         batch.end();
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-
         gameWorld.render();
         gameWorld.update();
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
     }
 
     private void changeBackground() {
