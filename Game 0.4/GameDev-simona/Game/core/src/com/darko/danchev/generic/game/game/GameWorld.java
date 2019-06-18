@@ -49,13 +49,9 @@ public class GameWorld {
                 worldWidth /2, WORLD_HEIGHT / 2 ,2,2);
         this.stage = new Stage(new StretchViewport(worldWidth, WORLD_HEIGHT));
 
-
-
         this.stage.addActor(player);
 
         this.initWalls();
-
-
 
         //this.batch = new SpriteBatch();
         //this.debugRenderer = new Box2DDebugRenderer();
@@ -112,4 +108,9 @@ public class GameWorld {
             enemyWalls.add(enemyWall);
         }
     }
+
+    public List<EnemyWall> getEnemyWalls() {
+        return enemyWalls;
+    }
+
 }

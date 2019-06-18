@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.darko.danchev.generic.game.GenericGame;
 import com.darko.danchev.generic.game.assets.Assets;
+import com.darko.danchev.generic.game.assets.enums.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +20,9 @@ public class EnemyWall {
     private World physicsWorld;
     private List<Enemy> enemyList;
     private float x;
-    private  float y;
+    private float y;
     private Stage stage;
+    private Color color;
 
     public EnemyWall(GenericGame genericGame, World physicsWorld,Stage stage,float x, float y){
         this.genericGame = genericGame;
@@ -51,10 +53,11 @@ public class EnemyWall {
 
    private void initWall(){
        Random random = new Random();
-       int index = random.nextInt(7);
+       int index = random.nextInt(4);
        Enemy enemy = new Enemy(genericGame, physicsWorld,
-               genericGame.assets.manager.get(Assets.enemies[index], Texture.class),
+               genericGame.assets.manager.get(Assets.blocks[index].getFilename(), Texture.class),
                8.5f, y , 15, 1.4f);
+       this.color = Assets.blocks[index].getColor();
        float ratio = (float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth();
        float worldWidth = GenericGame.WORLD_HEIGHT / ratio;
        enemy.setSize(worldWidth+1, 1.5f);
@@ -69,5 +72,7 @@ public class EnemyWall {
     public float getY(){
         return y;
     }
+
+    public Color getColor() {return color;}
 
 }

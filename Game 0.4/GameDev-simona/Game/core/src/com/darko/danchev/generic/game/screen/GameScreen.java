@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.darko.danchev.generic.game.GenericGame;
 import com.darko.danchev.generic.game.assets.Assets;
 import com.darko.danchev.generic.game.game.GameWorld;
+import com.darko.danchev.generic.game.assets.enums.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class GameScreen implements Screen {
 
         this.batch = new SpriteBatch();
         this.camera = new OrthographicCamera();
-        this.camera.setToOrtho(false,GenericGame.WIDTH,GenericGame.HEIGHT);
+        this.camera.setToOrtho(false, GenericGame.WIDTH, GenericGame.HEIGHT);
         this.gameWorld = new GameWorld(this.genericGame);
         this.background = genericGame.assets.manager.get(Assets.background, Texture.class);
         float ratio = (float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth();
@@ -88,6 +89,13 @@ public class GameScreen implements Screen {
         // red part
         if (Gdx.input.getX() <  Gdx.graphics.getWidth()/3f) {
             if (Gdx.input.isTouched()) {
+
+                System.out.println(gameWorld.getEnemyWalls().get(0).getColor());
+
+                if(gameWorld.getEnemyWalls().get(0).getColor() != Color.RED) {
+                    System.out.println("GAME OVER");
+                }
+
                 Gdx.gl.glClearColor(242/255f, 4/255f, 48/255f, 1); //
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             }
@@ -95,6 +103,11 @@ public class GameScreen implements Screen {
         // blue part
         if (Gdx.input.getX() >  Gdx.graphics.getWidth()/3f && Gdx.input.getX() < (Gdx.graphics.getWidth()/3f)*2) {
             if (Gdx.input.isTouched()) {
+
+                if(gameWorld.getEnemyWalls().get(0).getColor() != Color.BLUE) {
+                    System.out.println("GAME OVER");
+                }
+
                 Gdx.gl.glClearColor(4/255f, 107/255f, 242/255f, 1); //
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             }
@@ -102,6 +115,11 @@ public class GameScreen implements Screen {
         //yellow part
         if (Gdx.input.getX() >  (Gdx.graphics.getWidth()/3f)*2) {
             if (Gdx.input.isTouched()) {
+
+                if(gameWorld.getEnemyWalls().get(0).getColor() != Color.YELLOW) {
+                    System.out.println("GAME OVER");
+                }
+
                 Gdx.gl.glClearColor(242/255f, 182/255f, 4/255f, 1); //
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             }
