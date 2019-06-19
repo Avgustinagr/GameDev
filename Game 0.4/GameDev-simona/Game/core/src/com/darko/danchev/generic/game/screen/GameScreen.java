@@ -61,7 +61,7 @@ public class GameScreen implements Screen {
         this.camera.setToOrtho(false, GenericGame.WIDTH, GenericGame.HEIGHT);
         this.gameWorld = new GameWorld(this.genericGame);
         this.background = genericGame.assets.manager.get(Assets.background, Texture.class);
-        this.font = new BitmapFont();
+        this.font = new BitmapFont(Gdx.files.internal("bitmapfonts/furore.fnt"));
 
         float ratio = (float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth();
         float worldWidth = WORLD_HEIGHT / ratio;
@@ -161,7 +161,6 @@ public class GameScreen implements Screen {
         String currentScore = "Score " + this.gameWorld.getScore();
         glyphLayout.setText(font, currentScore);
         float width = glyphLayout.width;
-        font.getData().setScale(8);
         font.draw(this.batch, glyphLayout, camera.position.x - width/2, GenericGame.HEIGHT - 50 );
     }
 
