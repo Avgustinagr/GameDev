@@ -1,19 +1,18 @@
 package com.darko.danchev.generic.game.listener;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.darko.danchev.generic.game.game.GameWorld;
-import com.darko.danchev.generic.game.model.Enemy;
-import com.darko.danchev.generic.game.model.Player;
+import com.darko.danchev.generic.game.model.EnemyBlock;
+import com.darko.danchev.generic.game.model.Ball;
 
-public class B2dContactListener implements ContactListener {
+public class SameColorsContactListener implements ContactListener {
 
     private GameWorld gameWorld;
 
-    public B2dContactListener(GameWorld gameWorld) {
+    public SameColorsContactListener(GameWorld gameWorld) {
         this.gameWorld = gameWorld;
     }
 
@@ -22,23 +21,28 @@ public class B2dContactListener implements ContactListener {
         String classA = contact.getFixtureA().getBody().getUserData().getClass().getName();
         String classB = contact.getFixtureB().getBody().getUserData().getClass().getName();
 
-        if(classA.equals("com.darko.danchev.generic.game.model.Player") && classB.equals("com.darko.danchev.generic.game.model.Enemy")){
-            Player player = (Player)(contact.getFixtureA().getBody().getUserData());
-            Enemy enemy = (Enemy) (contact.getFixtureB().getBody().getUserData());
-            if (player.getColormove() != enemy.getEnemyColor()){
-                player.die();
-            }
-            else
-            {
+        if (classA.equals("com.darko.danchev.generic.game.model.EnemyBlock") && classB.equals("com.darko.danchev.generic.game.model.Ball")) {
+
+            EnemyBlock colorBlock = (EnemyBlock) (contact.getFixtureA().getBody().getUserData());
+            Ball ball = (Ball) (contact.getFixtureB().getBody().getUserData());
+            System.out.println(ball.getBackgroundColor());
+            System.out.println(colorBlock.getEnemyColor());
+
+            if (ball.getBackgroundColor() != colorBlock.getEnemyColor()) {
+                ball.setBackgroundColorToColorless();
+                ball.die();
+            } else {
+
                 updateScore();
+                ball.setBackgroundColorToColorless();
                 contact.setEnabled(false);
             }
         }
-        else if(classA.equals("com.darko.danchev.generic.game.model.EnemyWall") && classB.equals("com.darko.danchev.generic.game.model.Player")){
-            Player player = (Player)(contact.getFixtureB().getBody().getUserData());
-            player.die();
+      /*  else if(classA.equals("com.darko.danchev.generic.game.model.ColorBlock") && classB.equals("com.darko.danchev.generic.game.model.Ball")){
+            Ball ball = (Ball)(contact.getFixtureB().getBody().getUserData());
+            ball.die();
 
-        }
+        }*/
     }
 
     @Override

@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.darko.danchev.generic.game.GenericGame;
 import com.darko.danchev.generic.game.assets.enums.Color;
 
-public class Enemy extends Image {
+public class EnemyBlock extends Image {
 
     private GenericGame genericGame;
     private World physicsWorld;
@@ -20,16 +20,16 @@ public class Enemy extends Image {
     private Color color;
     private boolean scored;
 
-    public Enemy(GenericGame genericGame, World physicsWorld, Texture appearance,
-                 float x, float y, float width, float height, Color color){
+    public EnemyBlock(GenericGame genericGame, World physicsWorld, Texture appearance,
+                      float x, float y, float width, float height, Color color) {
         super(appearance);
         this.genericGame = genericGame;
         this.physicsWorld = physicsWorld;
-        setPosition(x,y);
-        setOrigin(x,y);
+        setPosition(x, y);
+        setOrigin(x, y);
         setWidth(width);
         setHeight(height);
-        this.color  = color;
+        this.color = color;
         this.scored = false;
         initBody();
     }
@@ -38,35 +38,36 @@ public class Enemy extends Image {
         return color;
     }
 
-    public void die(){
+    public void die() {
         genericGame.gameState = GenericGame.GAME_STATE.MENU;
     }
 
-    private void initBody(){
+    private void initBody() {
         BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set(getX(),getY());
-        bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.position.set(getX(), getY());
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
 
         body = physicsWorld.createBody(bodyDef);
 
         PolygonShape bodyShape = new PolygonShape();
-        bodyShape.setAsBox(getWidth() / 2,getHeight() / 2);
+        bodyShape.setAsBox(getWidth() / 2, getHeight() / 2);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = bodyShape;
         fixtureDef.density = 0.1f;
-        fixtureDef.friction = 0.9f;
-        fixtureDef.restitution = 0f;
+        fixtureDef.friction = 0.1f;
+        fixtureDef.restitution = 0.1f;
 
         body.createFixture(fixtureDef);
         body.setUserData(this);
+        body.setLinearVelocity(0, 0);
 
         bodyShape.dispose();
     }
 
     @Override
-    public void act(float delta){
-        this.setPosition(body.getPosition().x - getWidth() / 2,body.getPosition().y - getHeight() / 2);
+    public void act(float delta) {
+        this.setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
         this.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
     }
 

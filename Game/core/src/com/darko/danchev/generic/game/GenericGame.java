@@ -13,54 +13,54 @@ import com.darko.danchev.generic.game.screen.MenuScreen;
 
 public class GenericGame extends Game {
 
-	public enum GAME_STATE{
-		PLAYING,
-		MENU
-	}
+    public enum GAME_STATE {
+        PLAYING,
+        MENU
+    }
 
-	public static float WIDTH = 2520; //pixels
-	public static float HEIGHT = 4160;
+    public static float WIDTH = 2520; //pixels
+    public static float HEIGHT = 4160;
 
-	public static float WORLD_HEIGHT = 20; // the unit is meters
+    public static float WORLD_HEIGHT = 20; // the unit is meters
 
-	public Assets assets;
+    public Assets assets;
 
-	public GAME_STATE gameState;
-	public int highScore;
-	private Preferences preferences;
+    public GAME_STATE gameState;
+    public int highScore;
+    private Preferences preferences;
 
-	@Override
-	public void create () {
-		this.assets = new Assets();
-		this.assets.load(); // ASYNC
-		while (!this.assets.manager.update()){
-			System.out.println("Loading: " + this.assets.manager.getLoadedAssets());
-		}
-		this.gameState = GAME_STATE.MENU;
-		this.preferences = Gdx.app.getPreferences("highScorePreferences");
-		if(preferences.contains("highScore")) {
-			this.highScore =preferences.getInteger("highScore");
-		} else {
-			updateHighScore(0);
-			this.highScore = 0;
-		}
+    @Override
+    public void create() {
+        this.assets = new Assets();
+        this.assets.load(); // ASYNC
+        while (!this.assets.manager.update()) {
+            System.out.println("Loading: " + this.assets.manager.getLoadedAssets());
+        }
+        this.gameState = GAME_STATE.MENU;
+        this.preferences = Gdx.app.getPreferences("highScorePreferences");
+        if (preferences.contains("highScore")) {
+            this.highScore = preferences.getInteger("highScore");
+        } else {
+            updateHighScore(0);
+            this.highScore = 0;
+        }
 
-		this.setScreen(new MenuScreen(this));
-	}
+        this.setScreen(new MenuScreen(this));
+    }
 
-	public void updateHighScore(int newHighScore) {
-		preferences.putInteger("highScore",newHighScore);
-		preferences.flush();
-	}
+    public void updateHighScore(int newHighScore) {
+        preferences.putInteger("highScore", newHighScore);
+        preferences.flush();
+    }
 
-	@Override
-	public void render () {
-		super.render();
-	}
-	
-	@Override
-	public void dispose () {
-		super.dispose();
-		this.assets.dispose();
-	}
+    @Override
+    public void render() {
+        super.render();
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        this.assets.dispose();
+    }
 }
