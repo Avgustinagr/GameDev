@@ -1,12 +1,12 @@
-package com.darko.danchev.generic.game.listener;
+package com.fmi.game.development.ryb.listener;
 
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.darko.danchev.generic.game.game.GameWorld;
-import com.darko.danchev.generic.game.model.EnemyBlock;
-import com.darko.danchev.generic.game.model.Ball;
+import com.fmi.game.development.ryb.game.GameWorld;
+import com.fmi.game.development.ryb.model.EnemyBlock;
+import com.fmi.game.development.ryb.model.Ball;
 
 public class SameColorsContactListener implements ContactListener {
 

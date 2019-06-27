@@ -1,8 +1,8 @@
-package com.darko.danchev.generic.game.desktop;
+package com.fmi.game.development.ryb.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.darko.danchev.generic.game.GenericGame;
+import com.fmi.game.development.ryb.GenericGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {

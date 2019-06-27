@@ -1,15 +1,10 @@
-package com.darko.danchev.generic.game;
+package com.fmi.game.development.ryb;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.darko.danchev.generic.game.assets.Assets;
-import com.darko.danchev.generic.game.screen.GameScreen;
-import com.darko.danchev.generic.game.screen.MenuScreen;
+import com.fmi.game.development.ryb.assets.Assets;
+import com.fmi.game.development.ryb.screen.MenuScreen;
 
 public class GenericGame extends Game {
 

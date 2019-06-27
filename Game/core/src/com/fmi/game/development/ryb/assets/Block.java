@@ -1,6 +1,6 @@
-package com.darko.danchev.generic.game.assets;
+package com.fmi.game.development.ryb.assets;
 
-import com.darko.danchev.generic.game.assets.enums.Color;
+import com.fmi.game.development.ryb.assets.enums.Color;
 
 public class Block {
 

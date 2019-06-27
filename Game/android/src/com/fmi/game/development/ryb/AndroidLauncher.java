@@ -1,10 +1,9 @@
-package com.darko.danchev.generic.game;
+package com.fmi.game.development.ryb;
 
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.darko.danchev.generic.game.GenericGame;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override

@@ -1,4 +1,4 @@
-package com.darko.danchev.generic.game.game;
+package com.fmi.game.development.ryb.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -6,16 +6,16 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.darko.danchev.generic.game.GenericGame;
-import com.darko.danchev.generic.game.assets.Assets;
-import com.darko.danchev.generic.game.listener.SameColorsContactListener;
-import com.darko.danchev.generic.game.model.EnemyBlock;
-import com.darko.danchev.generic.game.model.Ball;
-import com.darko.danchev.generic.game.screen.MenuScreen;
+import com.fmi.game.development.ryb.GenericGame;
+import com.fmi.game.development.ryb.assets.Assets;
+import com.fmi.game.development.ryb.listener.SameColorsContactListener;
+import com.fmi.game.development.ryb.model.EnemyBlock;
+import com.fmi.game.development.ryb.model.Ball;
+import com.fmi.game.development.ryb.screen.MenuScreen;
 
 import java.util.Random;
 
-import static com.darko.danchev.generic.game.GenericGame.WORLD_HEIGHT;
+import static com.fmi.game.development.ryb.GenericGame.WORLD_HEIGHT;
 
 public class GameWorld {
 

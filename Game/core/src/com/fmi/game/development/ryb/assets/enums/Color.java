@@ -1,4 +1,4 @@
-package com.darko.danchev.generic.game.assets.enums;
+package com.fmi.game.development.ryb.assets.enums;
 
 public enum Color {
     COLORLESS,

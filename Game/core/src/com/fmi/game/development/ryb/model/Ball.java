@@ -1,4 +1,4 @@
-package com.darko.danchev.generic.game.model;
+package com.fmi.game.development.ryb.model;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -6,8 +6,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.darko.danchev.generic.game.GenericGame;
-import com.darko.danchev.generic.game.assets.enums.Color;
+import com.fmi.game.development.ryb.GenericGame;
+import com.fmi.game.development.ryb.assets.enums.Color;
 
 
 public class Ball extends Image {

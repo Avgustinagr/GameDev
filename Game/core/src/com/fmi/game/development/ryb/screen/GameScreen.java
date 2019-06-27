@@ -1,4 +1,4 @@
-package com.darko.danchev.generic.game.screen;
+package com.fmi.game.development.ryb.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -14,15 +14,15 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.darko.danchev.generic.game.GenericGame;
-import com.darko.danchev.generic.game.assets.Assets;
-import com.darko.danchev.generic.game.game.GameWorld;
-import com.darko.danchev.generic.game.assets.enums.Color;
+import com.fmi.game.development.ryb.GenericGame;
+import com.fmi.game.development.ryb.assets.Assets;
+import com.fmi.game.development.ryb.assets.enums.Color;
+import com.fmi.game.development.ryb.game.GameWorld;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.darko.danchev.generic.game.GenericGame.WORLD_HEIGHT;
+import static com.fmi.game.development.ryb.GenericGame.WORLD_HEIGHT;
 
 public class GameScreen implements Screen {
 
