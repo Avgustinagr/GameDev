@@ -21,13 +21,16 @@ public class Assets {
     public static String redbutton = "menu/red.png";
     public static String bluebutton = "menu/blue.png";
     public static String yellowbutton = "menu/yellow.png";
-    
+
+
+
 
     public Assets(){
         manager = new AssetManager();
     }
 
     public void load(){
+
         initializeBlocks();
 
         manager.load(player, Texture.class);

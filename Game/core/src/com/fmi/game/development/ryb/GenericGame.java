@@ -3,6 +3,7 @@ package com.fmi.game.development.ryb;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.audio.Music;
 import com.fmi.game.development.ryb.assets.Assets;
 import com.fmi.game.development.ryb.screen.MenuScreen;
 
@@ -24,6 +25,8 @@ public class GenericGame extends Game {
     public int highScore = 0;
     private Preferences preferences;
 
+    private Music music;
+
     @Override
     public void create() {
         this.assets = new Assets();
@@ -40,6 +43,11 @@ public class GenericGame extends Game {
             updateHighScore(0);
             this.highScore = 0;
         }
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("splash/fantasytheme.mp3"));
+        music.setLooping(true);
+        music.play();
+
 
         this.setScreen(new MenuScreen(this));
     }
@@ -58,6 +66,7 @@ public class GenericGame extends Game {
     public void dispose() {
         super.dispose();
         this.assets.dispose();
+        music.dispose();
     }
 
 }

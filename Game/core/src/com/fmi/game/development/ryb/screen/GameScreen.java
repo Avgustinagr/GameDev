@@ -3,6 +3,7 @@ package com.fmi.game.development.ryb.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -36,7 +37,6 @@ public class GameScreen implements Screen {
     private ImageButton button;
     private Stage stage;
     private BitmapFont font;
-
 
     public GameScreen(GenericGame genericGame) {
 
@@ -87,7 +87,6 @@ public class GameScreen implements Screen {
     private void helperChangeBackground(int r, int g, int b, Color backgroundColor) {
         /* Helps to change background according to the given color
         * Used in - flagFilterBackground() */
-
         Gdx.gl.glClearColor(r/ 255f, g / 255f, b / 255f, 1); //
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         gameWorld.ball.setBackgroundColor(backgroundColor);
