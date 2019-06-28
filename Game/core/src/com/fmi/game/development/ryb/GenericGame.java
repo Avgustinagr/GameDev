@@ -21,7 +21,7 @@ public class GenericGame extends Game {
     public Assets assets;
 
     public GAME_STATE gameState;
-    public int highScore;
+    public int highScore = 0;
     private Preferences preferences;
 
     @Override
@@ -33,8 +33,9 @@ public class GenericGame extends Game {
         }
         this.gameState = GAME_STATE.MENU;
         this.preferences = Gdx.app.getPreferences("highScorePreferences");
+
         if (preferences.contains("highScore")) {
-            this.highScore = preferences.getInteger("highScore");
+            this.highScore = preferences.getInteger("highScore", 0);
         } else {
             updateHighScore(0);
             this.highScore = 0;

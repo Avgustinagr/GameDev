@@ -21,15 +21,15 @@ public class SameColorsContactListener implements ContactListener {
         String classA = contact.getFixtureA().getBody().getUserData().getClass().getName();
         String classB = contact.getFixtureB().getBody().getUserData().getClass().getName();
 
-        if (classA.equals("com.darko.danchev.generic.game.model.EnemyBlock") && classB.equals("com.darko.danchev.generic.game.model.Ball")) {
+        if (classA.equals("com.fmi.game.development.ryb.model.EnemyBlock")
+                && classB.equals("com.fmi.game.development.ryb.model.Ball")) {
 
             EnemyBlock colorBlock = (EnemyBlock) (contact.getFixtureA().getBody().getUserData());
             Ball ball = (Ball) (contact.getFixtureB().getBody().getUserData());
-            System.out.println(ball.getBackgroundColor());
-            System.out.println(colorBlock.getEnemyColor());
+  /*          System.out.println(ball.getBackgroundColor());
+            System.out.println(colorBlock.getEnemyColor());*/
 
             if (ball.getBackgroundColor() != colorBlock.getEnemyColor()) {
-                ball.setBackgroundColorToColorless();
                 ball.die();
             } else {
 
@@ -61,7 +61,7 @@ public class SameColorsContactListener implements ContactListener {
     }
 
     private void updateScore() {
-
+        System.out.println(gameWorld.getScore());
         int score = gameWorld.getScore() + 1;
         gameWorld.setScore(score);
     }

@@ -1,0 +1,54 @@
+
+enemyBlocks.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+blue
+  rotate: false
+  xy: 1, 537
+  size: 2607, 266
+  orig: 2607, 266
+  offset: 0, 0
+  index: -1
+enemy
+  rotate: false
+  xy: 1, 269
+  size: 2607, 266
+  orig: 2607, 266
+  offset: 0, 0
+  index: -1
+green
+  rotate: false
+  xy: 2610, 537
+  size: 2607, 266
+  orig: 2607, 266
+  offset: 0, 0
+  index: -1
+orange
+  rotate: false
+  xy: 1, 1
+  size: 2607, 266
+  orig: 2607, 266
+  offset: 0, 0
+  index: -1
+purple
+  rotate: false
+  xy: 2610, 269
+  size: 2607, 266
+  orig: 2607, 266
+  offset: 0, 0
+  index: -1
+red
+  rotate: false
+  xy: 5219, 537
+  size: 2607, 266
+  orig: 2607, 266
+  offset: 0, 0
+  index: -1
+yellow
+  rotate: false
+  xy: 2610, 1
+  size: 2607, 266
+  orig: 2607, 266
+  offset: 0, 0
+  index: -1

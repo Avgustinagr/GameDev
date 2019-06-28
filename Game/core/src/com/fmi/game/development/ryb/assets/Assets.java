@@ -10,9 +10,9 @@ public class Assets {
 
     public AssetManager manager;
 
-    public static String player = "player/player.png";
-    private static String[] blockFiles = {"enemy/enemy.png", "enemy/blue.png", /*"enemy/green.png", "enemy/orange.png",
-            "enemy/purple.png", */"enemy/red.png" , "enemy/yellow.png"};
+    public static String player = "ball/player.png";
+    private static String[] blockFiles = {"enemyBlock/enemy.png", "enemyBlock/blue.png", /*"enemy/green.png", "enemy/orange.png",
+            "enemy/purple.png", */"enemyBlock/red.png" , "enemyBlock/yellow.png"};
     private static Color[] blockColors = {Color.BLUE, Color.BLUE, Color.RED, Color.YELLOW};
     public static Block[] blocks = new Block[blocksCount];
     public static String background = "ui/background.png";

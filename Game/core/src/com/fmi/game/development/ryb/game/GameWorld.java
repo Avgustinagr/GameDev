@@ -25,8 +25,7 @@ public class GameWorld {
     private Stage stage;
     private float worldWidth;
     private EnemyBlock currentColorBlock;
-    private int score;
-
+    private int score = 0;
     //private SpriteBatch batch;
     //private Box2DDebugRenderer debugRenderer;
     //private Box2DDebugRenderer debugRenderer;
@@ -64,9 +63,9 @@ public class GameWorld {
         this.regenerateEnemy();
         if (genericGame.gameState == GenericGame.GAME_STATE.MENU) {
 
-            if (genericGame.highScore < score) {
-                genericGame.highScore = score;
-                genericGame.updateHighScore(score);
+            if (genericGame.highScore < this.score) {
+                genericGame.highScore = this.score;
+                genericGame.updateHighScore(this.score);
             }
 
             genericGame.setScreen(new MenuScreen(genericGame));

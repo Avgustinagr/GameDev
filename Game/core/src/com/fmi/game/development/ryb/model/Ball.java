@@ -67,6 +67,7 @@ public class Ball extends Image {
     }
 
     public void die() {
+        setBackgroundColorToColorless();
         genericGame.gameState = GenericGame.GAME_STATE.MENU;
     }
 
