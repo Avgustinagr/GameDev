@@ -51,7 +51,6 @@ public class Ball extends Image {
 
         CircleShape bodyShape = new CircleShape();
         bodyShape.setRadius(1f);
-
         body.createFixture(bodyShape, 0.0f);
 
         body.setUserData(this);

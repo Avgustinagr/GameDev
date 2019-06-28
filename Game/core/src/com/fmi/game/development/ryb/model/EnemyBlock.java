@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.fmi.game.development.ryb.GenericGame;
 import com.fmi.game.development.ryb.assets.enums.Color;
+import com.fmi.game.development.ryb.game.GameWorld;
 
 public class EnemyBlock extends Image {
 
@@ -19,9 +20,12 @@ public class EnemyBlock extends Image {
     private Body body;
     private Color color;
     private boolean scored;
+    private GameWorld gameWorld;
+    private float velocity;
+    private int lastScoreChangedVelocity;
 
     public EnemyBlock(GenericGame genericGame, World physicsWorld, Texture appearance,
-                      float x, float y, float width, float height, Color color) {
+                      float x, float y, float width, float height, Color color, GameWorld gameWorld) {
         super(appearance);
         this.genericGame = genericGame;
         this.physicsWorld = physicsWorld;
@@ -31,6 +35,8 @@ public class EnemyBlock extends Image {
         setHeight(height);
         this.color = color;
         this.scored = false;
+        this.gameWorld = gameWorld;
+        this.lastScoreChangedVelocity = 0;
         initBody();
     }
 
@@ -54,21 +60,26 @@ public class EnemyBlock extends Image {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = bodyShape;
-        fixtureDef.density = 0.1f;
+        fixtureDef.density = 1f;
         fixtureDef.friction = 0.1f;
         fixtureDef.restitution = 0.1f;
 
         body.createFixture(fixtureDef);
         body.setUserData(this);
-        body.setLinearVelocity(0, 0);
+        this.velocity = -5f;
+        body.setLinearVelocity(0,  this.velocity);
 
         bodyShape.dispose();
     }
 
+
+
     @Override
     public void act(float delta) {
         this.setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
-        this.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
+
+        changeVelocity();
+
     }
 
     public boolean isScored() {
@@ -77,5 +88,16 @@ public class EnemyBlock extends Image {
 
     public void makeScored() {
         this.scored = true;
+    }
+
+    private void changeVelocity() {
+        int currentScore = this.gameWorld.getScore();
+
+        if( this.velocity > -15f && currentScore%5 == 0 && currentScore > 0 && this.lastScoreChangedVelocity < currentScore) {
+            this.velocity -= 1f;
+            this.lastScoreChangedVelocity = currentScore;
+        }
+
+       this.body.setLinearVelocity(0, this.velocity);
     }
 }

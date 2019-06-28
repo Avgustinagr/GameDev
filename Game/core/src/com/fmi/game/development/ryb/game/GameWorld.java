@@ -78,7 +78,7 @@ public class GameWorld {
         int index = random.nextInt(4);
         this.currentColorBlock = new EnemyBlock(genericGame, physicsWorld,
                 genericGame.assets.manager.get(Assets.blocks[index].getFilename(), Texture.class),
-                worldWidth / 2, WORLD_HEIGHT, worldWidth, WORLD_HEIGHT / 20, Assets.blocks[index].getColor());
+                worldWidth / 2, WORLD_HEIGHT, worldWidth, WORLD_HEIGHT / 20, Assets.blocks[index].getColor(), this);
         float ratio = (float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth();
         float worldWidth = GenericGame.WORLD_HEIGHT / ratio;
         this.currentColorBlock.setSize(worldWidth + 1, 1.5f);
@@ -91,7 +91,7 @@ public class GameWorld {
         int index = random.nextInt(4);
         this.currentColorBlock = new EnemyBlock(genericGame, physicsWorld,
                 genericGame.assets.manager.get(Assets.blocks[index].getFilename(), Texture.class),
-                8.5f, this.currentColorBlock.getY() + 15, 15, 1.4f, Assets.blocks[index].getColor());
+                8.5f, this.currentColorBlock.getY() + 15, 15, 1.4f, Assets.blocks[index].getColor(), this);
         float ratio = (float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth();
         float worldWidth = GenericGame.WORLD_HEIGHT / ratio;
         currentColorBlock.setSize(worldWidth + 1, 1.5f);

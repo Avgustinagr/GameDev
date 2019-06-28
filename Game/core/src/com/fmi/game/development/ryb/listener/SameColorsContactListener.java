@@ -61,7 +61,6 @@ public class SameColorsContactListener implements ContactListener {
     }
 
     private void updateScore() {
-        System.out.println(gameWorld.getScore());
         int score = gameWorld.getScore() + 1;
         gameWorld.setScore(score);
     }

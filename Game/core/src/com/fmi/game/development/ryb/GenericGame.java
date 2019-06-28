@@ -59,4 +59,5 @@ public class GenericGame extends Game {
         super.dispose();
         this.assets.dispose();
     }
+
 }
