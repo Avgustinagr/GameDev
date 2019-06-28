@@ -75,7 +75,7 @@ public class GameWorld {
     private void initEnemy() {
 
         Random random = new Random();
-        int index = random.nextInt(4);
+        int index = random.nextInt(7);
         this.currentColorBlock = new EnemyBlock(genericGame, physicsWorld,
                 genericGame.assets.manager.get(Assets.blocks[index].getFilename(), Texture.class),
                 worldWidth / 2, WORLD_HEIGHT, worldWidth, WORLD_HEIGHT / 20, Assets.blocks[index].getColor(), this);
@@ -88,7 +88,7 @@ public class GameWorld {
 
     private void regenerateEnemy() {
         Random random = new Random();
-        int index = random.nextInt(4);
+        int index = random.nextInt(7);
         this.currentColorBlock = new EnemyBlock(genericGame, physicsWorld,
                 genericGame.assets.manager.get(Assets.blocks[index].getFilename(), Texture.class),
                 8.5f, this.currentColorBlock.getY() + 15, 15, 1.4f, Assets.blocks[index].getColor(), this);
