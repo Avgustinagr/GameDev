@@ -63,7 +63,7 @@ public class MenuScreen implements Screen {
            // System.out.println(highScore);
             glyphLayout.setText(font, highScore);
             float width = glyphLayout.width;
-            font.draw(this.batch, glyphLayout, camera.position.x - width / 2, GenericGame.HEIGHT - 50);
+            font.draw(this.batch, glyphLayout, camera.position.x - width / 2, GenericGame.HEIGHT/5);
     }
 
     @Override

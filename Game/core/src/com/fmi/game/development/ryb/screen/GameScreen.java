@@ -77,6 +77,12 @@ public class GameScreen implements Screen {
         drawScore();
         batch.end();
 
+        if (Gdx.input.isKeyPressed(Input.Keys.X)){
+            genericGame.gameState = GenericGame.GAME_STATE.PAUSE;
+        }
+
+
+
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
 
@@ -141,8 +147,9 @@ public class GameScreen implements Screen {
 
             flag += 5;
         }
-
+        gameWorld.ball.setBackgroundColor(Color.COLORLESS);
         flagFilterBackground(flag);
+
     }
 
     private void setUpButtons(float worldWidth) {
