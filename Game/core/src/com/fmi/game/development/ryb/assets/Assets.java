@@ -2,12 +2,11 @@ package com.fmi.game.development.ryb.assets;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.fmi.game.development.ryb.assets.enums.Color;
 
 public class Assets {
 
-    private final static int blocksCount = 36;
+    private final static int BLOCKS_COUNT = 36;
 
     public AssetManager manager;
 
@@ -27,7 +26,7 @@ public class Assets {
 
     };
     private static Color[] blockColors = {Color.RED, Color.BLUE, Color.YELLOW, Color.PURPLE, Color.GREEN, Color.ORANGE};
-    public static Block[] blocks = new Block[blocksCount];
+    public static Block[] blocks = new Block[BLOCKS_COUNT];
     public static String background = "ui/background.png";
     public static String splash = "splash/start.png";
     public static String redbutton = "menu/red.png";
@@ -48,7 +47,7 @@ public class Assets {
         manager.load(player, Texture.class);
         manager.load(pausebutton, Texture.class);
 
-        for(int i=0; i<blocksCount; i++) {
+        for(int i = 0; i< BLOCKS_COUNT; i++) {
             manager.load(blocks[i].getFilename(), Texture.class);
         }
 
@@ -62,7 +61,7 @@ public class Assets {
 
 
     private void initializeBlocks() {
-        for(int i =0; i<blocksCount; i++) {
+        for(int i = 0; i< BLOCKS_COUNT; i++) {
 
             blocks[i] = new Block(blockFiles[i], blockColors[i/6]);
 

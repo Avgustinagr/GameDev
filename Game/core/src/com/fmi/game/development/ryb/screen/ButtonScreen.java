@@ -1,6 +1,5 @@
 package com.fmi.game.development.ryb.screen;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
@@ -21,8 +20,8 @@ import static com.fmi.game.development.ryb.RYB.WORLD_HEIGHT;
 
 public class ButtonScreen {
 
-    private final int numberOfButtons = 3;
-    private final int maxNumberOfTouchPoints = 2;
+    private final int NUMBER_OF_BUTTONS = 3;
+    private final int MAX_NUMBER_OF_TOUCH_BUTTONS = 2;
 
     private float worldWidth;
     private Stage stage;
@@ -31,9 +30,6 @@ public class ButtonScreen {
     private ImageButton button;
     private RYB ryb;
     private GameWorld gameWorld;
-
-
-
 
     public ButtonScreen(float worldWidth, Stage stage, RYB ryb, GameWorld gameWorld) {
         this.worldWidth = worldWidth;
@@ -46,11 +42,11 @@ public class ButtonScreen {
     private void setUpButtons() {
         /* Sets up colour menu at the bottom */
 
-        List<ImageButton> buttons = new ArrayList<ImageButton>(numberOfButtons);
+        List<ImageButton> buttons = new ArrayList<ImageButton>(NUMBER_OF_BUTTONS);
 
-        String[] buttonsFileNames =  {Assets.redbutton, Assets.bluebutton, Assets.yellowbutton};
+        String[] buttonsFileNames = {Assets.redbutton, Assets.bluebutton, Assets.yellowbutton};
 
-        for(int i=0 ; i<numberOfButtons; i++) {
+        for (int i = 0; i < NUMBER_OF_BUTTONS; i++) {
             myTextureRegion = new TextureRegion(ryb.assets.manager.get(buttonsFileNames[i], Texture.class));
             myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
             button = new ImageButton(myTexRegionDrawable); //Set the button up
@@ -83,7 +79,7 @@ public class ButtonScreen {
         boolean rightPressed = false;
         boolean downPressed = false;
 
-        for (int i = 0; i < maxNumberOfTouchPoints; i++) {
+        for (int i = 0; i < MAX_NUMBER_OF_TOUCH_BUTTONS; i++) {
             // red part
             if ((Gdx.input.getX(i) < Gdx.graphics.getWidth() / 3f
                     && Gdx.input.isTouched(i)) || (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT) && !leftPressed)) {
@@ -111,30 +107,36 @@ public class ButtonScreen {
         flagFilterBackground(colorValue);
     }
 
-    private void flagFilterBackground( int flag){
+    private void flagFilterBackground(int flag) {
         /* Helps to change backhound according to the given flag
          * Used in - changeBackground() */
 
-        switch (flag){
+        switch (flag) {
             case 1:
-                helperChangeBackground(242, 4, 48, Color.RED); break;
+                helperChangeBackground(242, 4, 48, Color.RED);
+                break;
             case 3:
-                helperChangeBackground(242, 182, 4, Color.YELLOW); break;
+                helperChangeBackground(242, 182, 4, Color.YELLOW);
+                break;
             case 5:
-                helperChangeBackground(4, 107, 242, Color.BLUE); break;
+                helperChangeBackground(4, 107, 242, Color.BLUE);
+                break;
             case 4:
-                helperChangeBackground(237, 87, 20, Color.ORANGE); break;
+                helperChangeBackground(237, 87, 20, Color.ORANGE);
+                break;
             case 6:
-                helperChangeBackground(117, 60, 143, Color.PURPLE); break;
+                helperChangeBackground(117, 60, 143, Color.PURPLE);
+                break;
             case 8:
-                helperChangeBackground(100, 180, 96, Color.GREEN); break;
+                helperChangeBackground(100, 180, 96, Color.GREEN);
+                break;
         }
     }
 
     private void helperChangeBackground(int r, int g, int b, Color backgroundColor) {
         /* Helps to change background according to the given color
          * Used in - flagFilterBackground() */
-        Gdx.gl.glClearColor(r/ 255f, g / 255f, b / 255f, 1); //
+        Gdx.gl.glClearColor(r / 255f, g / 255f, b / 255f, 1); //
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         gameWorld.getBall().setBackgroundColor(backgroundColor);
     }
@@ -144,7 +146,7 @@ public class ButtonScreen {
         myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
         button = new ImageButton(myTexRegionDrawable);
         button.setSize(1, 0.5f);
-        button.setPosition(0.5f, WORLD_HEIGHT- 1);
+        button.setPosition(0.5f, WORLD_HEIGHT - 1);
 
         this.stage.addActor(button);
         System.out.println("pause button here");

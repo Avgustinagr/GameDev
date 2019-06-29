@@ -1,25 +1,18 @@
 package com.fmi.game.development.ryb.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.fmi.game.development.ryb.RYB;
-import com.fmi.game.development.ryb.assets.Assets;
-import com.fmi.game.development.ryb.assets.enums.Color;
 import com.fmi.game.development.ryb.game.GameWorld;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.fmi.game.development.ryb.RYB.WORLD_HEIGHT;
@@ -67,7 +60,7 @@ public class GameScreen implements Screen {
         System.out.print(Gdx.input.getY());
         System.out.println(Gdx.input.getX());
         if ((Gdx.input.getX() < 40 && Gdx.input.getY() < 40)
-                && Gdx.input.isTouched()){
+                && Gdx.input.isTouched()) {
             ryb.gameState = RYB.GAME_STATE.PAUSE;
         }
         batch.begin();

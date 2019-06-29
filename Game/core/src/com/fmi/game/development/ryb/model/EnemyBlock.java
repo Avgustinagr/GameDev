@@ -1,6 +1,5 @@
 package com.fmi.game.development.ryb.model;
 
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -18,7 +17,6 @@ public class EnemyBlock extends Image {
     private World physicsWorld;
     private Body body;
     private Color color;
-   // private boolean scored;
     private GameWorld gameWorld;
     private float velocity;
 

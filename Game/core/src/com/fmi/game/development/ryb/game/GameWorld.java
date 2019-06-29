@@ -21,9 +21,11 @@ import static com.fmi.game.development.ryb.RYB.WORLD_HEIGHT;
 
 public class GameWorld {
 
-    private final int maxNumberOfEnemies = 2;
-    private final int maxNumberOfBlockFiles = 36;
-    private final int blockDifference = 15;
+    public static final int MAX_VELOCITY = -15;
+
+    private final int MAX_NUMBER_OF_ENEMIES_ON_SCREEN = 2;
+    private final int MAX_NUMBER_OF_BLOCKS = 36;
+    private final int BLOCK_HEIGHT_DIFFERENCE = 15;
 
     private RYB ryb;
     private World physicsWorld;
@@ -58,21 +60,21 @@ public class GameWorld {
     }
 
     private void initEnemy() {
-        enemies = new ArrayList<EnemyBlock>(maxNumberOfEnemies);
+        enemies = new ArrayList<EnemyBlock>(MAX_NUMBER_OF_ENEMIES_ON_SCREEN);
 
         Random random = new Random();
-        int index = random.nextInt(maxNumberOfBlockFiles);
+        int index = random.nextInt(MAX_NUMBER_OF_BLOCKS);
 
         float blockX = worldWidth / 2;
         float blockY = WORLD_HEIGHT;
 
-        for(int i = 0; i < maxNumberOfEnemies; i++) {
+        for(int i = 0; i < MAX_NUMBER_OF_ENEMIES_ON_SCREEN; i++) {
             EnemyBlock enemy = new EnemyBlock(ryb, physicsWorld,
                     ryb.assets.manager.get(Assets.blocks[index].getFilename(), Texture.class),
                     blockX, blockY , this.blockWidth, this.blockHeight, Assets.blocks[index].getColor(), this);
-            blockY += blockDifference;
+            blockY += BLOCK_HEIGHT_DIFFERENCE;
             enemies.add(enemy);
-            index = random.nextInt(maxNumberOfBlockFiles);
+            index = random.nextInt(MAX_NUMBER_OF_BLOCKS);
         }
 
     }
@@ -109,10 +111,10 @@ public class GameWorld {
         if (enemies.size() == 1) {
 
             Random random = new Random();
-            int index = random.nextInt(maxNumberOfBlockFiles);
+            int index = random.nextInt(MAX_NUMBER_OF_BLOCKS);
             EnemyBlock enemy = new EnemyBlock(ryb, physicsWorld,
                     ryb.assets.manager.get(Assets.blocks[index].getFilename(), Texture.class),
-                    worldWidth / 2, enemies.get(enemies.size() - 1).getY() + blockDifference, this.blockWidth, this.blockHeight, Assets.blocks[index].getColor(), this);
+                    worldWidth / 2, enemies.get(enemies.size() - 1).getY() + BLOCK_HEIGHT_DIFFERENCE, this.blockWidth, this.blockHeight, Assets.blocks[index].getColor(), this);
             enemies.add(enemy);
         }
     }
