@@ -37,13 +37,6 @@ public class Ball extends Image {
         this.impact = Gdx.audio.newSound(Gdx.files.internal("splash/impact_laser2.ogg"));
     }
 
-    public Color getBackgroundColor() {
-        return this.backgroundColor;
-    }
-
-    public void setBackgroundColor(Color backgroundColor) {
-        this.backgroundColor = backgroundColor;
-    }
 
     private void initBody() {
         BodyDef bodyDef = new BodyDef();
@@ -65,6 +58,14 @@ public class Ball extends Image {
 
     public void setBackgroundColorToColorless() {
         this.backgroundColor = Color.COLORLESS;
+    }
+
+    public Color getBackgroundColor() {
+        return this.backgroundColor;
+    }
+
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
     }
 
     public void die() {

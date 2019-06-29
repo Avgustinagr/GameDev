@@ -26,8 +26,7 @@ public class SameColorsContactListener implements ContactListener {
 
             EnemyBlock colorBlock = (EnemyBlock) (contact.getFixtureA().getBody().getUserData());
             Ball ball = (Ball) (contact.getFixtureB().getBody().getUserData());
-  /*          System.out.println(ball.getBackgroundColor());
-            System.out.println(colorBlock.getEnemyColor());*/
+
 
             if (ball.getBackgroundColor() != colorBlock.getEnemyColor()) {
                 ball.die();
@@ -38,11 +37,6 @@ public class SameColorsContactListener implements ContactListener {
                 contact.setEnabled(false);
             }
         }
-      /*  else if(classA.equals("com.darko.danchev.generic.game.model.ColorBlock") && classB.equals("com.darko.danchev.generic.game.model.Ball")){
-            Ball ball = (Ball)(contact.getFixtureB().getBody().getUserData());
-            ball.die();
-
-        }*/
     }
 
     @Override

@@ -24,6 +24,7 @@ import java.util.List;
 
 import static com.fmi.game.development.ryb.RYB.WORLD_HEIGHT;
 
+
 public class GameScreen implements Screen {
 
     private RYB ryb;
@@ -31,16 +32,13 @@ public class GameScreen implements Screen {
     private OrthographicCamera camera;
     private GameWorld gameWorld;
     private List<ImageButton> buttons;
-    private TextureRegion myTextureRegion;
-    private TextureRegionDrawable myTexRegionDrawable;
-    private ImageButton button;
+
     private Stage stage;
     private BitmapFont font;
+    private ButtonScreen buttonScreen;
 
     public GameScreen(RYB ryb) {
-
         this.ryb = ryb;
-
     }
 
     @Override
@@ -56,7 +54,9 @@ public class GameScreen implements Screen {
         float worldWidth = WORLD_HEIGHT * ratio;
         this.stage = new Stage(new StretchViewport(worldWidth, WORLD_HEIGHT));
         stage.clear();
-        setUpButtons(worldWidth);
+
+        this.buttonScreen = new ButtonScreen(worldWidth, this.stage, this.ryb, this.gameWorld);
+        buttonScreen.drawPause();
     }
 
     @Override
@@ -64,9 +64,14 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(34 / 255f, 34 / 255f, 34 / 255f, 1); //     0, 51, 102
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(camera.combined);
+        System.out.print(Gdx.input.getY());
+        System.out.println(Gdx.input.getX());
+        if ((Gdx.input.getX() < 40 && Gdx.input.getY() < 40)
+                && Gdx.input.isTouched()){
+            ryb.gameState = RYB.GAME_STATE.PAUSE;
+        }
         batch.begin();
-        changeBackground();
-        //batch.draw(background,0,0);
+        buttonScreen.changeBackground();
         batch.end();
         gameWorld.render();
 
@@ -74,112 +79,10 @@ public class GameScreen implements Screen {
         drawScore();
         batch.end();
 
-        if (Gdx.input.isKeyPressed(Input.Keys.X)){
-            ryb.gameState = RYB.GAME_STATE.PAUSE;
-        }
-
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
 
         gameWorld.update();
-    }
-
-    private void helperChangeBackground(int r, int g, int b, Color backgroundColor) {
-        /* Helps to change background according to the given color
-         * Used in - flagFilterBackground() */
-        Gdx.gl.glClearColor(r/ 255f, g / 255f, b / 255f, 1); //
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameWorld.ball.setBackgroundColor(backgroundColor);
-    }
-
-    private void flagFilterBackground( int flag){
-        /* Helps to change backhound according to the given flag
-         * Used in - changeBackground() */
-
-        switch (flag){
-            case 1:
-                helperChangeBackground(242, 4, 48, Color.RED); break;
-            case 3:
-                helperChangeBackground(242, 182, 4, Color.YELLOW); break;
-            case 5:
-                helperChangeBackground(4, 107, 242, Color.BLUE); break;
-            case 4:
-                helperChangeBackground(237, 87, 20, Color.ORANGE); break;
-            case 6:
-                helperChangeBackground(117, 60, 143, Color.PURPLE); break;
-            case 8:
-                helperChangeBackground(100, 180, 96, Color.GREEN); break;
-        }
-    }
-
-    private void changeBackground() {
-        int flag = 0;
-        /*
-         RED = 1
-         YELLOW = 3
-         BLUE = 5
-         ORANGE = 4  (RED + YELLOW)
-         PURPLE = 6 (RED + BLUE)
-         GREEN = 8 (BLUE + YELLOW)
-         */
-        boolean leftPressed = false;
-        boolean rightPressed = false;
-        boolean downPressed = false;
-
-        for (int i = 0; i < 2; i++) { // 2 is max number of touch points
-            // red part
-            if ((Gdx.input.getX(i) < Gdx.graphics.getWidth() / 3f
-                    && Gdx.input.isTouched(i)) || (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT) && !leftPressed)) {
-
-                flag += 1;
-                leftPressed = Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT);
-            }
-            //yellow part
-            else if ((Gdx.input.getX(i) > (Gdx.graphics.getWidth() / 3f) * 2
-                    && Gdx.input.isTouched(i)) || (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT) && !rightPressed)) {
-
-                flag += 3;
-                rightPressed = Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT);
-            }
-
-            // blue part
-            else if (((Gdx.input.getX(i) > Gdx.graphics.getWidth() / 3f && Gdx.input.getX(i) < (Gdx.graphics.getWidth() / 3f) * 2)
-                    && Gdx.input.isTouched(i)) || (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN) && !downPressed)) {
-
-                flag += 5;
-                downPressed = Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN);
-            }
-        }
-        flagFilterBackground(flag);
-    }
-
-
-
-
-    private void setUpButtons(float worldWidth) {
-        /* Sets up colour menu at the bottom */
-
-        buttons = new ArrayList<ImageButton>(3);
-        myTextureRegion = new TextureRegion(ryb.assets.manager.get(Assets.redbutton, Texture.class));
-        myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
-        button = new ImageButton(myTexRegionDrawable); //Set the button up
-        buttons.add(button);
-        myTextureRegion = new TextureRegion(ryb.assets.manager.get(Assets.bluebutton, Texture.class));
-        myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
-        button = new ImageButton(myTexRegionDrawable);
-        buttons.add(button);
-        myTextureRegion = new TextureRegion(ryb.assets.manager.get(Assets.yellowbutton, Texture.class));
-        myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
-        button = new ImageButton(myTexRegionDrawable);
-        buttons.add(button);
-        float i = 0;
-        float third = worldWidth / 3;
-        for (ImageButton button : buttons) {
-            button.setPosition(i, -1);
-            button.setSize(third + 1, 5);
-            this.stage.addActor(button);
-            i = i + third;
-        }
     }
 
 

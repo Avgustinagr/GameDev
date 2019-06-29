@@ -25,7 +25,7 @@ public class RYB extends Game {
     public Assets assets;
 
     public GAME_STATE gameState;
-    public int highScore = 0;
+    private int highScore = 0;
     private Preferences preferences;
 
     private Music music;
@@ -38,7 +38,6 @@ public class RYB extends Game {
         while (!this.assets.manager.update()) {
             System.out.println("Loading: " + this.assets.manager.getLoadedAssets());
         }
-        this.gameState = GAME_STATE.MENU;
         this.preferences = Gdx.app.getPreferences("highScorePreferences");
 
         if (preferences.contains("highScore")) {
@@ -53,12 +52,8 @@ public class RYB extends Game {
         music.play();
 
 
+        this.gameState = GAME_STATE.MENU;
         this.setScreen(new MenuScreen(this));
-    }
-
-    public void updateHighScore(int newHighScore) {
-        preferences.putInteger("highScore", newHighScore);
-        preferences.flush();
     }
 
     @Override
@@ -71,12 +66,16 @@ public class RYB extends Game {
             case PAUSE:
                 Gdx.gl.glClearColor(34 / 255f, 34 / 255f, 34 / 255f, 1); // 	0, 51, 102
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                /*SpriteBatch batch = new SpriteBatch();
+                batch.begin();
+                Texture pausescreen = assets.manager.get(Assets.pausescreen, Texture.class);
+                batch.draw(pausescreen, 0, 0);
+                batch.end();*/
                 if (Gdx.input.isKeyPressed(Input.Keys.Z)){
                     gameState = GAME_STATE.PLAYING;
                 }
                 break;
         }
-
     }
 
     @Override
@@ -84,6 +83,19 @@ public class RYB extends Game {
         super.dispose();
         this.assets.dispose();
         music.dispose();
+    }
+
+    public void updateHighScore(int newHighScore) {
+        preferences.putInteger("highScore", newHighScore);
+        preferences.flush();
+    }
+
+    public int getHighScore(){
+        return this.highScore;
+    }
+
+    public void setHighScore(int highScore) {
+        this.highScore = highScore;
     }
 
 }
