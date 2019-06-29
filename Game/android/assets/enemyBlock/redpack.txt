@@ -1,0 +1,47 @@
+red.png
+size: 2607, 1596
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Group 5
+  rotate: false
+  xy: 0, 0
+  size: 2607, 266
+  orig: 2607, 266
+  offset: 0, 0
+  index: -1
+Group 6
+  rotate: false
+  xy: 0, 266
+  size: 2607, 266
+  orig: 2607, 266
+  offset: 0, 0
+  index: -1
+Group 7
+  rotate: false
+  xy: 0, 532
+  size: 2607, 266
+  orig: 2607, 266
+  offset: 0, 0
+  index: -1
+Group 8
+  rotate: false
+  xy: 0, 798
+  size: 2607, 266
+  orig: 2607, 266
+  offset: 0, 0
+  index: -1
+Group 9
+  rotate: false
+  xy: 0, 1064
+  size: 2607, 266
+  orig: 2607, 266
+  offset: 0, 0
+  index: -1
+Group 10
+  rotate: false
+  xy: 0, 1330
+  size: 2607, 266
+  orig: 2607, 266
+  offset: 0, 0
+  index: -1

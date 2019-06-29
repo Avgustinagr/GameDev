@@ -1,5 +1,7 @@
 package com.fmi.game.development.ryb.model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -17,6 +19,8 @@ public class Ball extends Image {
     private Body body;
     private Color backgroundColor;
 
+    private Sound impact;
+
     public Ball(GenericGame genericGame, World physicsWorld, Texture appearance, float x, float y,
                 float width, float height) {
         super(appearance);
@@ -29,6 +33,8 @@ public class Ball extends Image {
         this.physicsWorld = physicsWorld;
         this.initBody();
         this.backgroundColor = Color.COLORLESS;
+
+        this.impact = Gdx.audio.newSound(Gdx.files.internal("splash/impact_laser2.ogg"));
     }
 
     public Color getBackgroundColor() {
@@ -50,14 +56,13 @@ public class Ball extends Image {
         body = physicsWorld.createBody(bodyDef);
 
         CircleShape bodyShape = new CircleShape();
-        bodyShape.setRadius(2f);
+        bodyShape.setRadius(1.8f);
         body.createFixture(bodyShape, 0.0f);
 
         body.setUserData(this);
 
 
         bodyShape.dispose();
-
     }
 
 
@@ -66,6 +71,7 @@ public class Ball extends Image {
     }
 
     public void die() {
+        impact.play(0.3f);
         setBackgroundColorToColorless();
         genericGame.gameState = GenericGame.GAME_STATE.MENU;
     }

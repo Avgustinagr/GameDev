@@ -2,7 +2,10 @@ package com.fmi.game.development.ryb;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.GL20;
 import com.fmi.game.development.ryb.assets.Assets;
 import com.fmi.game.development.ryb.screen.MenuScreen;
 
@@ -10,7 +13,8 @@ public class GenericGame extends Game {
 
     public enum GAME_STATE {
         PLAYING,
-        MENU
+        MENU,
+        PAUSE;
     }
 
     public static float WIDTH = 2520; //pixels
@@ -23,6 +27,8 @@ public class GenericGame extends Game {
     public GAME_STATE gameState;
     public int highScore = 0;
     private Preferences preferences;
+
+    private Music music;
 
     @Override
     public void create() {
@@ -41,6 +47,11 @@ public class GenericGame extends Game {
             this.highScore = 0;
         }
 
+        music = Gdx.audio.newMusic(Gdx.files.internal("splash/fantasytheme.mp3"));
+        music.setLooping(true);
+        music.play();
+
+
         this.setScreen(new MenuScreen(this));
     }
 
@@ -51,13 +62,27 @@ public class GenericGame extends Game {
 
     @Override
     public void render() {
-        super.render();
+        switch (gameState){
+            case PLAYING:
+                super.render(); break;
+            case MENU:
+                super.render(); break;
+            case PAUSE:
+                Gdx.gl.glClearColor(34 / 255f, 34 / 255f, 34 / 255f, 1); // 	0, 51, 102
+                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                if (Gdx.input.isKeyPressed(Input.Keys.Z)){
+                    gameState = GAME_STATE.PLAYING;
+                }
+                break;
+        }
+
     }
 
     @Override
     public void dispose() {
         super.dispose();
         this.assets.dispose();
+        music.dispose();
     }
 
 }
