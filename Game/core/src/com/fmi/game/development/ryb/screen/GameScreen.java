@@ -3,7 +3,6 @@ package com.fmi.game.development.ryb.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.fmi.game.development.ryb.GenericGame;
+import com.fmi.game.development.ryb.RYB;
 import com.fmi.game.development.ryb.assets.Assets;
 import com.fmi.game.development.ryb.assets.enums.Color;
 import com.fmi.game.development.ryb.game.GameWorld;
@@ -23,11 +22,11 @@ import com.fmi.game.development.ryb.game.GameWorld;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.fmi.game.development.ryb.GenericGame.WORLD_HEIGHT;
+import static com.fmi.game.development.ryb.RYB.WORLD_HEIGHT;
 
 public class GameScreen implements Screen {
 
-    private GenericGame genericGame;
+    private RYB ryb;
     private SpriteBatch batch;
     private OrthographicCamera camera;
     private GameWorld gameWorld;
@@ -38,9 +37,9 @@ public class GameScreen implements Screen {
     private Stage stage;
     private BitmapFont font;
 
-    public GameScreen(GenericGame genericGame) {
+    public GameScreen(RYB ryb) {
 
-        this.genericGame = genericGame;
+        this.ryb = ryb;
 
     }
 
@@ -49,8 +48,8 @@ public class GameScreen implements Screen {
 
         this.batch = new SpriteBatch();
         this.camera = new OrthographicCamera();
-        this.camera.setToOrtho(false, GenericGame.WIDTH, GenericGame.HEIGHT);
-        this.gameWorld = new GameWorld(this.genericGame);
+        this.camera.setToOrtho(false, RYB.WIDTH, RYB.HEIGHT);
+        this.gameWorld = new GameWorld(this.ryb);
         this.font = new BitmapFont(Gdx.files.internal("bitmapfonts/furore.fnt"));
 
         float ratio = (float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth();
@@ -76,15 +75,12 @@ public class GameScreen implements Screen {
         batch.end();
 
         if (Gdx.input.isKeyPressed(Input.Keys.X)){
-            genericGame.gameState = GenericGame.GAME_STATE.PAUSE;
+            ryb.gameState = RYB.GAME_STATE.PAUSE;
         }
-
-
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
 
-        gameWorld.update();
         gameWorld.update();
     }
 
@@ -130,7 +126,7 @@ public class GameScreen implements Screen {
         boolean rightPressed = false;
         boolean downPressed = false;
 
-        for (int i = 0; i < 2; i++) { // 20 is max number of touch points
+        for (int i = 0; i < 2; i++) { // 2 is max number of touch points
             // red part
             if ((Gdx.input.getX(i) < Gdx.graphics.getWidth() / 3f
                     && Gdx.input.isTouched(i)) || (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT) && !leftPressed)) {
@@ -153,7 +149,6 @@ public class GameScreen implements Screen {
                 flag += 5;
                 downPressed = Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN);
             }
-            gameWorld.ball.setBackgroundColor(Color.COLORLESS);
         }
         flagFilterBackground(flag);
     }
@@ -165,15 +160,15 @@ public class GameScreen implements Screen {
         /* Sets up colour menu at the bottom */
 
         buttons = new ArrayList<ImageButton>(3);
-        myTextureRegion = new TextureRegion(genericGame.assets.manager.get(Assets.redbutton, Texture.class));
+        myTextureRegion = new TextureRegion(ryb.assets.manager.get(Assets.redbutton, Texture.class));
         myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
         button = new ImageButton(myTexRegionDrawable); //Set the button up
         buttons.add(button);
-        myTextureRegion = new TextureRegion(genericGame.assets.manager.get(Assets.bluebutton, Texture.class));
+        myTextureRegion = new TextureRegion(ryb.assets.manager.get(Assets.bluebutton, Texture.class));
         myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
         button = new ImageButton(myTexRegionDrawable);
         buttons.add(button);
-        myTextureRegion = new TextureRegion(genericGame.assets.manager.get(Assets.yellowbutton, Texture.class));
+        myTextureRegion = new TextureRegion(ryb.assets.manager.get(Assets.yellowbutton, Texture.class));
         myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
         button = new ImageButton(myTexRegionDrawable);
         buttons.add(button);
@@ -181,7 +176,7 @@ public class GameScreen implements Screen {
         float third = worldWidth / 3;
         for (ImageButton button : buttons) {
             button.setPosition(i, -1);
-            button.setSize(third, 5);
+            button.setSize(third + 1, 5);
             this.stage.addActor(button);
             i = i + third;
         }
@@ -193,7 +188,7 @@ public class GameScreen implements Screen {
         String currentScore = "Score " + this.gameWorld.getScore();
         glyphLayout.setText(font, currentScore);
         float width = glyphLayout.width;
-        font.draw(this.batch, glyphLayout, camera.position.x - width / 2, GenericGame.HEIGHT - 50);
+        font.draw(this.batch, glyphLayout, camera.position.x - width / 2, RYB.HEIGHT - 50);
     }
 
     @Override

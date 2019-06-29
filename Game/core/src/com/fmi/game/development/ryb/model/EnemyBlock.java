@@ -2,20 +2,19 @@ package com.fmi.game.development.ryb.model;
 
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.fmi.game.development.ryb.GenericGame;
+import com.fmi.game.development.ryb.RYB;
 import com.fmi.game.development.ryb.assets.enums.Color;
 import com.fmi.game.development.ryb.game.GameWorld;
 
 public class EnemyBlock extends Image {
 
-    private GenericGame genericGame;
+    private RYB ryb;
     private World physicsWorld;
     private Body body;
     private Color color;
@@ -24,20 +23,24 @@ public class EnemyBlock extends Image {
     private float velocity;
     private int lastScoreChangedVelocity;
 
-    public EnemyBlock(GenericGame genericGame, World physicsWorld, Texture appearance,
+    public EnemyBlock(RYB ryb, World physicsWorld, Texture appearance,
                       float x, float y, float width, float height, Color color, GameWorld gameWorld) {
         super(appearance);
-        this.genericGame = genericGame;
+        this.ryb = ryb;
         this.physicsWorld = physicsWorld;
         setPosition(x, y);
         setOrigin(x, y);
         setWidth(width);
         setHeight(height);
+        this.gameWorld = gameWorld;
+        this.velocity = this.gameWorld.getVelocity();
         this.color = color;
         this.scored = false;
-        this.gameWorld = gameWorld;
         this.lastScoreChangedVelocity = 0;
         initBody();
+
+        this.setSize(gameWorld.getWorldWidth() + 1, 1.5f);
+        gameWorld.stage.addActor(this);
     }
 
     public Color getEnemyColor() {
@@ -45,7 +48,7 @@ public class EnemyBlock extends Image {
     }
 
     public void die() {
-        genericGame.gameState = GenericGame.GAME_STATE.MENU;
+        ryb.gameState = RYB.GAME_STATE.MENU;
     }
 
     private void initBody() {
@@ -66,19 +69,17 @@ public class EnemyBlock extends Image {
 
         body.createFixture(fixtureDef);
         body.setUserData(this);
-        this.velocity = -5f;
+
         body.setLinearVelocity(0,  this.velocity);
 
         bodyShape.dispose();
     }
 
-
-
     @Override
     public void act(float delta) {
         this.setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
 
-        changeVelocity();
+        System.out.println( this.gameWorld.getVelocity());
 
     }
 
@@ -90,14 +91,4 @@ public class EnemyBlock extends Image {
         this.scored = true;
     }
 
-    private void changeVelocity() {
-        int currentScore = this.gameWorld.getScore();
-
-        if( this.velocity > -15f && currentScore%5 == 0 && currentScore > 0 && this.lastScoreChangedVelocity < currentScore) {
-            this.velocity -= 1f;
-            this.lastScoreChangedVelocity = currentScore;
-        }
-
-       this.body.setLinearVelocity(0, this.velocity);
-    }
 }

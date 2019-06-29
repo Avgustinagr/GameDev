@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.fmi.game.development.ryb.assets.Assets;
 import com.fmi.game.development.ryb.screen.MenuScreen;
 
-public class GenericGame extends Game {
+public class RYB extends Game {
 
     public enum GAME_STATE {
         PLAYING,

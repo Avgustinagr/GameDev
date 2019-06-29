@@ -8,20 +8,20 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.fmi.game.development.ryb.GenericGame;
+import com.fmi.game.development.ryb.RYB;
 import com.fmi.game.development.ryb.assets.enums.Color;
 
 
 public class Ball extends Image {
 
-    private GenericGame genericGame;
+    private RYB ryb;
     private World physicsWorld;
     private Body body;
     private Color backgroundColor;
 
     private Sound impact;
 
-    public Ball(GenericGame genericGame, World physicsWorld, Texture appearance, float x, float y,
+    public Ball(RYB ryb, World physicsWorld, Texture appearance, float x, float y,
                 float width, float height) {
         super(appearance);
         this.setX(x);
@@ -29,7 +29,7 @@ public class Ball extends Image {
         this.setOrigin(x, y);
         this.setWidth(width);
         this.setHeight(height);
-        this.genericGame = genericGame;
+        this.ryb = ryb;
         this.physicsWorld = physicsWorld;
         this.initBody();
         this.backgroundColor = Color.COLORLESS;
@@ -52,9 +52,6 @@ public class Ball extends Image {
 
         body = physicsWorld.createBody(bodyDef);
 
-
-        body = physicsWorld.createBody(bodyDef);
-
         CircleShape bodyShape = new CircleShape();
         bodyShape.setRadius(1.8f);
         body.createFixture(bodyShape, 0.0f);
@@ -73,7 +70,7 @@ public class Ball extends Image {
     public void die() {
         impact.play(0.3f);
         setBackgroundColorToColorless();
-        genericGame.gameState = GenericGame.GAME_STATE.MENU;
+        ryb.gameState = RYB.GAME_STATE.MENU;
     }
 
 

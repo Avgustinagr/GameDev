@@ -5,8 +5,8 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.fmi.game.development.ryb.game.GameWorld;
-import com.fmi.game.development.ryb.model.EnemyBlock;
 import com.fmi.game.development.ryb.model.Ball;
+import com.fmi.game.development.ryb.model.EnemyBlock;
 
 public class SameColorsContactListener implements ContactListener {
 
@@ -62,6 +62,9 @@ public class SameColorsContactListener implements ContactListener {
 
     private void updateScore() {
         int score = gameWorld.getScore() + 1;
+        if (score % 5 == 0) {
+            gameWorld.decreaseVelocity();
+        }
         gameWorld.setScore(score);
     }
 

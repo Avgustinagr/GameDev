@@ -8,28 +8,28 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.fmi.game.development.ryb.GenericGame;
+import com.fmi.game.development.ryb.RYB;
 import com.fmi.game.development.ryb.assets.Assets;
 
 public class MenuScreen implements Screen {
 
-    private GenericGame genericGame;
+    private RYB ryb;
     private SpriteBatch batch;
     private Texture splash;
     private OrthographicCamera camera;
     private BitmapFont font;
 
-    public MenuScreen(GenericGame genericGame) {
-        this.genericGame = genericGame;
+    public MenuScreen(RYB ryb) {
+        this.ryb = ryb;
     }
 
     @Override
     public void show() {
         this.batch = new SpriteBatch();
         this.camera = new OrthographicCamera();
-        this.camera.setToOrtho(false, GenericGame.WIDTH , GenericGame.HEIGHT);
+        this.camera.setToOrtho(false, RYB.WIDTH , RYB.HEIGHT);
         this.camera.update();
-        this.splash = genericGame.assets.manager.get(Assets.splash, Texture.class);
+        this.splash = ryb.assets.manager.get(Assets.splash, Texture.class);
         this.font = new BitmapFont(Gdx.files.internal("bitmapfonts/furore.fnt"));
     }
 
@@ -52,18 +52,18 @@ public class MenuScreen implements Screen {
 
 
         if (Gdx.input.justTouched()) {
-            genericGame.gameState = GenericGame.GAME_STATE.PLAYING;
-            genericGame.setScreen(new GameScreen(genericGame));
+            ryb.gameState = RYB.GAME_STATE.PLAYING;
+            ryb.setScreen(new GameScreen(ryb));
         }
     }
 
     private void drawHighScore() {
             GlyphLayout glyphLayout = new GlyphLayout();
-            String highScore = "High Score " + this.genericGame.highScore;
-           // System.out.println(highScore);
+            String highScore = "High Score " + this.ryb.highScore;
+           // System.out.println(highScore);f
             glyphLayout.setText(font, highScore);
             float width = glyphLayout.width;
-            font.draw(this.batch, glyphLayout, camera.position.x - width / 2, GenericGame.HEIGHT/5);
+            font.draw(this.batch, glyphLayout, camera.position.x - width / 2, RYB.HEIGHT/5);
     }
 
     @Override
