@@ -54,17 +54,15 @@ public class GameScreen implements Screen {
         this.font = new BitmapFont(Gdx.files.internal("bitmapfonts/furore.fnt"));
 
         float ratio = (float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth();
-        float worldWidth = WORLD_HEIGHT / ratio;
+        float worldWidth = WORLD_HEIGHT * ratio;
         this.stage = new Stage(new StretchViewport(worldWidth, WORLD_HEIGHT));
         stage.clear();
         setUpButtons(worldWidth);
-
-        //buttons.add(genericGame.assets.manager.get(Assets.redbutton, Texture.class));
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(34 / 255f, 34 / 255f, 34 / 255f, 1); // 	0, 51, 102
+        Gdx.gl.glClearColor(34 / 255f, 34 / 255f, 34 / 255f, 1); //     0, 51, 102
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
@@ -92,7 +90,7 @@ public class GameScreen implements Screen {
 
     private void helperChangeBackground(int r, int g, int b, Color backgroundColor) {
         /* Helps to change background according to the given color
-        * Used in - flagFilterBackground() */
+         * Used in - flagFilterBackground() */
         Gdx.gl.glClearColor(r/ 255f, g / 255f, b / 255f, 1); //
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         gameWorld.ball.setBackgroundColor(backgroundColor);
@@ -100,7 +98,7 @@ public class GameScreen implements Screen {
 
     private void flagFilterBackground( int flag){
         /* Helps to change backhound according to the given flag
-        * Used in - changeBackground() */
+         * Used in - changeBackground() */
 
         switch (flag){
             case 1:
@@ -128,29 +126,40 @@ public class GameScreen implements Screen {
          PURPLE = 6 (RED + BLUE)
          GREEN = 8 (BLUE + YELLOW)
          */
-        // red part
-        if ((Gdx.input.getX() < Gdx.graphics.getWidth() / 3f
-                && Gdx.input.isTouched()) || Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
+        boolean leftPressed = false;
+        boolean rightPressed = false;
+        boolean downPressed = false;
 
-            flag += 1;
+        for (int i = 0; i < 2; i++) { // 20 is max number of touch points
+            // red part
+            if ((Gdx.input.getX(i) < Gdx.graphics.getWidth() / 3f
+                    && Gdx.input.isTouched(i)) || (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT) && !leftPressed)) {
+
+                flag += 1;
+                leftPressed = Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT);
+            }
+            //yellow part
+            else if ((Gdx.input.getX(i) > (Gdx.graphics.getWidth() / 3f) * 2
+                    && Gdx.input.isTouched(i)) || (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT) && !rightPressed)) {
+
+                flag += 3;
+                rightPressed = Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT);
+            }
+
+            // blue part
+            else if (((Gdx.input.getX(i) > Gdx.graphics.getWidth() / 3f && Gdx.input.getX(i) < (Gdx.graphics.getWidth() / 3f) * 2)
+                    && Gdx.input.isTouched(i)) || (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN) && !downPressed)) {
+
+                flag += 5;
+                downPressed = Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN);
+            }
+            gameWorld.ball.setBackgroundColor(Color.COLORLESS);
         }
-        //yellow part
-        if ((Gdx.input.getX() > (Gdx.graphics.getWidth() / 3f) * 2
-                && Gdx.input.isTouched()) || Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
-
-            flag += 3;
-        }
-
-        // blue part
-        if (((Gdx.input.getX() > Gdx.graphics.getWidth() / 3f && Gdx.input.getX() < (Gdx.graphics.getWidth() / 3f) * 2)
-                && Gdx.input.isTouched()) || Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
-
-            flag += 5;
-        }
-        gameWorld.ball.setBackgroundColor(Color.COLORLESS);
         flagFilterBackground(flag);
-
     }
+
+
+
 
     private void setUpButtons(float worldWidth) {
         /* Sets up colour menu at the bottom */

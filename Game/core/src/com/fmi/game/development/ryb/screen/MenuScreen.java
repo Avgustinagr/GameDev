@@ -27,7 +27,7 @@ public class MenuScreen implements Screen {
     public void show() {
         this.batch = new SpriteBatch();
         this.camera = new OrthographicCamera();
-        this.camera.setToOrtho(false, GenericGame.WIDTH, GenericGame.HEIGHT);
+        this.camera.setToOrtho(false, GenericGame.WIDTH , GenericGame.HEIGHT);
         this.camera.update();
         this.splash = genericGame.assets.manager.get(Assets.splash, Texture.class);
         this.font = new BitmapFont(Gdx.files.internal("bitmapfonts/furore.fnt"));

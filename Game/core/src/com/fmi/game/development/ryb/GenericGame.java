@@ -32,6 +32,7 @@ public class GenericGame extends Game {
 
     @Override
     public void create() {
+
         this.assets = new Assets();
         this.assets.load(); // ASYNC
         while (!this.assets.manager.update()) {
