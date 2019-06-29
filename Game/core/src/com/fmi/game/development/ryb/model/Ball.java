@@ -50,7 +50,7 @@ public class Ball extends Image {
         body = physicsWorld.createBody(bodyDef);
 
         CircleShape bodyShape = new CircleShape();
-        bodyShape.setRadius(1f);
+        bodyShape.setRadius(2f);
         body.createFixture(bodyShape, 0.0f);
 
         body.setUserData(this);
