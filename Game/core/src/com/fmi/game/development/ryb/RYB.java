@@ -14,7 +14,7 @@ public class RYB extends Game {
     public enum GAME_STATE {
         PLAYING,
         MENU,
-        PAUSE;
+        PAUSE
     }
 
     public static float WIDTH = 2520; //pixels
