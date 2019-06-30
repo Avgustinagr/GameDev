@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.fmi.game.development.ryb.assets.Assets;
+import com.fmi.game.development.ryb.screen.LoadingScreen;
 import com.fmi.game.development.ryb.screen.MenuScreen;
 
 public class RYB extends Game {
@@ -16,13 +17,14 @@ public class RYB extends Game {
     public GAME_STATE gameState;
     private int highScore = 0;
     private Preferences preferences;
-    private Music music;
+    public Music music;
 
     @Override
     public void create() {
 
         this.assets = new Assets();
-        this.assets.load(); // ASYNC
+        this.setScreen(new LoadingScreen(this));
+        //this.assets.load(); // ASYNC
         while (!this.assets.manager.update()) {
             System.out.println("Loading: " + this.assets.manager.getLoadedAssets());
         }
@@ -35,25 +37,11 @@ public class RYB extends Game {
             this.highScore = 0;
         }
 
-        music = Gdx.audio.newMusic(Gdx.files.internal("splash/fantasytheme.mp3"));
-        music.setLooping(true);
-        music.play();
-
-
-        this.gameState = GAME_STATE.MENU;
-        this.setScreen(new MenuScreen(this));
     }
 
     @Override
     public void render() {
-        switch (gameState) {
-            case PLAYING:
-                super.render();
-                break;
-            case MENU:
-                super.render();
-                break;
-        }
+        super.render();
     }
 
     @Override
