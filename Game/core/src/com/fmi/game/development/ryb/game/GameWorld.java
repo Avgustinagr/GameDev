@@ -21,19 +21,23 @@ import static com.fmi.game.development.ryb.RYB.WORLD_HEIGHT;
 
 public class GameWorld {
 
+    public static final int MAX_VELOCITY = -15;
+
+    private final int MAX_NUMBER_OF_ENEMIES_ON_SCREEN = 2;
+    private final int MAX_NUMBER_OF_BLOCKS = 36;
+    private final int BLOCK_HEIGHT_DIFFERENCE = 15;
+
     private RYB ryb;
     private World physicsWorld;
-    public Ball ball;
+    private Ball ball;
     public Stage stage;
     private float worldWidth;
-    private EnemyBlock currentColorBlock;
-    private int score = 0;
+    private int score;
     private int blockVelocity;
-    int maxEnemies = 2;
     List<EnemyBlock> enemies;
-    //private SpriteBatch batch;
-    //private Box2DDebugRenderer debugRenderer;
-    //private Box2DDebugRenderer debugRenderer;
+
+    private float blockWidth;
+    private float blockHeight;
 
     public GameWorld(RYB ryb) {
         this.blockVelocity = -4;
@@ -44,14 +48,34 @@ public class GameWorld {
         float ratio = (float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth();
         this.worldWidth = WORLD_HEIGHT / ratio;
         this.ball = new Ball(ryb, physicsWorld, ryb.assets.manager.get(Assets.player, Texture.class),
-                worldWidth / 2 - 1, WORLD_HEIGHT / 3, 2, 2);
+                worldWidth / 2 - 1 , WORLD_HEIGHT / 3, 2, 2);
         this.stage = new Stage(new StretchViewport(worldWidth, WORLD_HEIGHT));
+
+        this.blockWidth = worldWidth + 1;
+        this.blockHeight = WORLD_HEIGHT / 20 + 0.5f;
 
         this.stage.addActor(ball);
         this.initEnemy();
         this.score = 0;
-        //this.batch = new SpriteBatch();
-        //this.debugRenderer = new Box2DDebugRenderer();
+    }
+
+    private void initEnemy() {
+        enemies = new ArrayList<EnemyBlock>(MAX_NUMBER_OF_ENEMIES_ON_SCREEN);
+
+        Random random = new Random();
+        int index = random.nextInt(MAX_NUMBER_OF_BLOCKS);
+
+        float blockX = worldWidth / 2;
+        float blockY = WORLD_HEIGHT;
+
+        for(int i = 0; i < MAX_NUMBER_OF_ENEMIES_ON_SCREEN; i++) {
+            EnemyBlock enemy = new EnemyBlock(ryb, physicsWorld,
+                    ryb.assets.manager.get(Assets.blocks[index].getFilename(), Texture.class),
+                    blockX, blockY , this.blockWidth, this.blockHeight, Assets.blocks[index].getColor(), this);
+            blockY += BLOCK_HEIGHT_DIFFERENCE;
+            enemies.add(enemy);
+            index = random.nextInt(MAX_NUMBER_OF_BLOCKS);
+        }
 
     }
 
@@ -61,16 +85,15 @@ public class GameWorld {
     }
 
     public void update() {
-        this.stage.act();
-/*        if(!this.ball.getTransition()) {
-            this.stage.getCamera().position.y = ball.getY();
-        }*/
 
+        this.stage.act();
         this.regenerateEnemy();
+        int highScore = ryb.getHighScore();
+
         if (ryb.gameState == RYB.GAME_STATE.MENU) {
 
-            if (ryb.highScore < this.score) {
-                ryb.highScore = this.score;
+            if (highScore < this.score) {
+                ryb.setHighScore(this.score);
                 ryb.updateHighScore(this.score);
             }
 
@@ -78,56 +101,20 @@ public class GameWorld {
         }
     }
 
-    private void initEnemy() {
-        enemies = new ArrayList<EnemyBlock>(2);
-
-        Random random = new Random();
-        int index = random.nextInt(7);
-
-        EnemyBlock enemy = new EnemyBlock(ryb, physicsWorld,
-                ryb.assets.manager.get(Assets.blocks[index].getFilename(), Texture.class),
-                worldWidth / 2, WORLD_HEIGHT, worldWidth, WORLD_HEIGHT / 20, Assets.blocks[index].getColor(), this);
-
-        enemies.add(enemy);
-
-
-        index = random.nextInt(7);
-
-        EnemyBlock second = new EnemyBlock(ryb, physicsWorld,
-                ryb.assets.manager.get(Assets.blocks[index].getFilename(), Texture.class),
-                worldWidth / 2,WORLD_HEIGHT + 15, worldWidth, WORLD_HEIGHT / 20, Assets.blocks[index].getColor(), this);
-
-        enemies.add(second);
-
-     //   stage.addActor(enemies.get(0));
-
-        /* for(int i = 0; i < 2; i++) {
-
-
-            this.currentColorBlock = ;
-            float ratio = (float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth();
-            float worldWidth = GenericGame.WORLD_HEIGHT / ratio;
-            this.currentColorBlock.setSize(worldWidth + 1, 1.5f);
-            stage.addActor(this.currentColorBlock);
-        }*/
-
-    }
 
     private void regenerateEnemy() {
 
         if (enemies.get(0).getY() < (stage.getCamera().position.y - worldWidth / 2)) {
-           enemies.get(0).remove();
+            enemies.get(0).remove();
             enemies.remove(0);
-            System.out.println("removed");
-
         }
         if (enemies.size() == 1) {
 
             Random random = new Random();
-            int index = random.nextInt(7);
+            int index = random.nextInt(MAX_NUMBER_OF_BLOCKS);
             EnemyBlock enemy = new EnemyBlock(ryb, physicsWorld,
                     ryb.assets.manager.get(Assets.blocks[index].getFilename(), Texture.class),
-                    worldWidth / 2, enemies.get(enemies.size() - 1).getY() + 15, worldWidth, WORLD_HEIGHT / 20, Assets.blocks[index].getColor(), this);
+                    worldWidth / 2, enemies.get(enemies.size() - 1).getY() + BLOCK_HEIGHT_DIFFERENCE, this.blockWidth, this.blockHeight, Assets.blocks[index].getColor(), this);
             enemies.add(enemy);
         }
     }
@@ -142,16 +129,15 @@ public class GameWorld {
         this.score = score;
     }
 
-    public float getWorldWidth() {
-        return this.worldWidth;
-    }
-
     public int getVelocity() {
-
         return this.blockVelocity;
     }
 
     public void decreaseVelocity() {
         this.blockVelocity -= 1;
+    }
+
+    public Ball getBall() {
+        return this.ball;
     }
 }

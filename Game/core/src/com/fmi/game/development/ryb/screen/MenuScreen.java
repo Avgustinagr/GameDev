@@ -35,19 +35,15 @@ public class MenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0 / 255f, 51 / 255f, 102 / 255f, 1); // 	0, 51, 102
 
+        Gdx.gl.glClearColor(0 / 255f, 51 / 255f, 102 / 255f, 1); // 	0, 51, 102
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(camera.combined);
         camera.update();
 
         batch.begin();
         batch.draw(splash, 0, 0);
-
-       // if(genericGame.highScore > 0) {
-            this.drawHighScore();
-        //
-
+        this.drawHighScore();
         batch.end();
 
 
@@ -59,8 +55,7 @@ public class MenuScreen implements Screen {
 
     private void drawHighScore() {
             GlyphLayout glyphLayout = new GlyphLayout();
-            String highScore = "High Score " + this.ryb.highScore;
-           // System.out.println(highScore);f
+            String highScore = "High Score " + this.ryb.getHighScore();
             glyphLayout.setText(font, highScore);
             float width = glyphLayout.width;
             font.draw(this.batch, glyphLayout, camera.position.x - width / 2, RYB.HEIGHT/5);
@@ -88,6 +83,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        this.batch.dispose();
+        this.font.dispose();
     }
 }

@@ -1,6 +1,5 @@
 package com.fmi.game.development.ryb.model;
 
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -18,10 +17,8 @@ public class EnemyBlock extends Image {
     private World physicsWorld;
     private Body body;
     private Color color;
-    private boolean scored;
     private GameWorld gameWorld;
     private float velocity;
-    private int lastScoreChangedVelocity;
 
     public EnemyBlock(RYB ryb, World physicsWorld, Texture appearance,
                       float x, float y, float width, float height, Color color, GameWorld gameWorld) {
@@ -35,20 +32,8 @@ public class EnemyBlock extends Image {
         this.gameWorld = gameWorld;
         this.velocity = this.gameWorld.getVelocity();
         this.color = color;
-        this.scored = false;
-        this.lastScoreChangedVelocity = 0;
         initBody();
-
-        this.setSize(gameWorld.getWorldWidth() + 1, 1.5f);
-        gameWorld.stage.addActor(this);
-    }
-
-    public Color getEnemyColor() {
-        return color;
-    }
-
-    public void die() {
-        ryb.gameState = RYB.GAME_STATE.MENU;
+        addBlock();
     }
 
     private void initBody() {
@@ -75,20 +60,17 @@ public class EnemyBlock extends Image {
         bodyShape.dispose();
     }
 
+    private void addBlock() {
+        gameWorld.stage.addActor(this);
+    }
+
     @Override
     public void act(float delta) {
         this.setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
-
-        System.out.println( this.gameWorld.getVelocity());
-
     }
 
-    public boolean isScored() {
-        return this.scored;
-    }
-
-    public void makeScored() {
-        this.scored = true;
+    public Color getEnemyColor() {
+        return color;
     }
 
 }

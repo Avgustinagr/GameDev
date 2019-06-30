@@ -16,16 +16,8 @@ public class Block {
         return color;
     }
 
-    public void setColor(Color colour) {
-        this.color = color;
-    }
-
     public String getFilename() {
         return filename;
-    }
-
-    public void setFilename(String filename) {
-        this.filename = filename;
     }
 
 }
