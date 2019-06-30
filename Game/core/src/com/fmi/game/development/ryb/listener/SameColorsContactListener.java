@@ -59,6 +59,7 @@ public class SameColorsContactListener implements ContactListener {
         if (gameWorld.MAX_VELOCITY < gameWorld.getVelocity() && score % 5 == 0) {
             gameWorld.decreaseVelocity();
         }
+
         gameWorld.setScore(score);
     }
 

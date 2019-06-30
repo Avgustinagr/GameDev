@@ -18,7 +18,7 @@ import java.util.List;
 
 import static com.fmi.game.development.ryb.RYB.WORLD_HEIGHT;
 
-public class ButtonScreen {
+public class ButtonsHandler {
 
     private final int NUMBER_OF_BUTTONS = 3;
     private final int MAX_NUMBER_OF_TOUCH_BUTTONS = 2;
@@ -31,7 +31,7 @@ public class ButtonScreen {
     private RYB ryb;
     private GameWorld gameWorld;
 
-    public ButtonScreen(float worldWidth, Stage stage, RYB ryb, GameWorld gameWorld) {
+    public ButtonsHandler(float worldWidth, Stage stage, RYB ryb, GameWorld gameWorld) {
         this.worldWidth = worldWidth;
         this.stage = stage;
         this.ryb = ryb;

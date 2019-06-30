@@ -28,7 +28,7 @@ public class GameScreen implements Screen {
 
     private Stage stage;
     private BitmapFont font;
-    private ButtonScreen buttonScreen;
+    private ButtonsHandler buttonsHandler;
 
     public GameScreen(RYB ryb) {
         this.ryb = ryb;
@@ -48,8 +48,7 @@ public class GameScreen implements Screen {
         this.stage = new Stage(new StretchViewport(worldWidth, WORLD_HEIGHT));
         stage.clear();
 
-        this.buttonScreen = new ButtonScreen(worldWidth, this.stage, this.ryb, this.gameWorld);
-        buttonScreen.drawPause();
+        this.buttonsHandler = new ButtonsHandler(worldWidth, this.stage, this.ryb, this.gameWorld);
     }
 
     @Override
@@ -57,14 +56,9 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(34 / 255f, 34 / 255f, 34 / 255f, 1); //     0, 51, 102
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(camera.combined);
-        System.out.print(Gdx.input.getY());
-        System.out.println(Gdx.input.getX());
-        if ((Gdx.input.getX() < 40 && Gdx.input.getY() < 40)
-                && Gdx.input.isTouched()) {
-            ryb.gameState = RYB.GAME_STATE.PAUSE;
-        }
+
         batch.begin();
-        buttonScreen.changeBackground();
+        buttonsHandler.changeBackground();
         batch.end();
         gameWorld.render();
 

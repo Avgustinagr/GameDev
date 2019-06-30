@@ -21,11 +21,13 @@ import static com.fmi.game.development.ryb.RYB.WORLD_HEIGHT;
 
 public class GameWorld {
 
-    public static final int MAX_VELOCITY = -15;
+    public static final float MAX_VELOCITY = -9f;
 
     private final int MAX_NUMBER_OF_ENEMIES_ON_SCREEN = 2;
     private final int MAX_NUMBER_OF_BLOCKS = 36;
     private final int BLOCK_HEIGHT_DIFFERENCE = 15;
+    private float INITIAL_VELOCITY = -4f;
+    private final float VELOCITY_DIFFERENCE = 0.5f;
 
     private RYB ryb;
     private World physicsWorld;
@@ -33,15 +35,14 @@ public class GameWorld {
     public Stage stage;
     private float worldWidth;
     private int score;
-    private int blockVelocity;
+    private float blockVelocity;
     List<EnemyBlock> enemies;
 
     private float blockWidth;
     private float blockHeight;
 
     public GameWorld(RYB ryb) {
-        this.blockVelocity = -4;
-
+        this.blockVelocity = INITIAL_VELOCITY;
         this.ryb = ryb;
         this.physicsWorld = new World(new Vector2(0, -0.5f), true);
         this.physicsWorld.setContactListener(new SameColorsContactListener(this));
@@ -129,12 +130,12 @@ public class GameWorld {
         this.score = score;
     }
 
-    public int getVelocity() {
+    public float getVelocity() {
         return this.blockVelocity;
     }
 
     public void decreaseVelocity() {
-        this.blockVelocity -= 1;
+        this.blockVelocity -= VELOCITY_DIFFERENCE;
     }
 
     public Ball getBall() {
