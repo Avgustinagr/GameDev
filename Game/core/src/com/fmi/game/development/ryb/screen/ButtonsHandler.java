@@ -141,15 +141,4 @@ public class ButtonScreen {
         gameWorld.getBall().setBackgroundColor(backgroundColor);
     }
 
-    public void drawPause() {
-        myTextureRegion = new TextureRegion(ryb.assets.manager.get(Assets.pausebutton, Texture.class));
-        myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
-        button = new ImageButton(myTexRegionDrawable);
-        button.setSize(1, 0.5f);
-        button.setPosition(0.5f, WORLD_HEIGHT - 1);
-
-        this.stage.addActor(button);
-        System.out.println("pause button here");
-    }
-
 }
